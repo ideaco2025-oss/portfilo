@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnFlow — Veloce Lab</title>
+<meta name="description" content="نموذج منصة تعليم إلكتروني — كورسات، مسارات تعلم، وآراء الطلاب">
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../veloce-lab-portfolio.html" class="logo-link">
+      <img src="../logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">VeloceLab</span>
+    </a>
+    <div class="nav-actions">
+      <a href="../veloce-lab-portfolio.html#portfolio" class="back-nav" data-i18n="back">→ العودة للمعرض</a>
+      <div class="lang-toggle">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="demo-pill" data-i18n="demo">نموذج عرض</span>
+  <h1 class="page-title">LearnFlow</h1>
+  <p class="page-desc" data-i18n="desc">منصة تعليم إلكتروني حديثة لعرض الكورسات ومسارات التعلم وآراء الطلاب.</p>
+
+  <div class="hero-shot">
+    <img src="../assets/educational.png" alt="LearnFlow preview" loading="lazy">
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3 data-i18n="challengeTitle">التحدي</h3>
+      <p data-i18n="challenge">منصة تعليمية تحتاج واجهة ملهمة تعرض الكورسات بشكل جذاب وتبني ثقة الطلاب.</p>
+    </div>
+    <div class="detail-card">
+      <h3 data-i18n="solutionTitle">الحل</h3>
+      <p data-i18n="solution">تصميم بنفسجي عصري مع أقسام للكورسات والمسارات وشريط آراء متحرك وتنقل SPA.</p>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3 data-i18n="featuresTitle">الميزات</h3>
+    <ul class="feature-list">
+      <li data-i18n="f1">عرض الكورسات والمسارات</li>
+      <li data-i18n="f2">شريط آراء الطلاب (Carousel)</li>
+      <li data-i18n="f3">حركات وتأثيرات بصرية</li>
+      <li data-i18n="f4">دعم العربية والإنجليزية</li>
+    </ul>
+  </div>
+
+  <div class="tech-row">
+    <span class="tech-tag">HTML</span>
+    <span class="tech-tag">Tailwind CSS</span>
+    <span class="tech-tag">Animations</span>
+    <span class="tech-tag">SPA</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="../educational.html" class="btn-primary" data-i18n="liveDemo">عرض النموذج الحي</a>
+    <a href="../veloce-lab-portfolio.html#contact" class="btn-ghost" data-i18n="contact">اطلب مشروعاً مشابهاً</a>
+  </div>
+</main>
+
+<footer><span data-i18n="footer">© 2025 Veloce Lab — نموذج عرض ضمن المعرض</span></footer>
+
+<script src="project.js"></script>
+<script>
+initProjectPage({
+  ar: {
+    pageTitle: "LearnFlow — Veloce Lab",
+    back: "→ العودة للمعرض", demo: "نموذج عرض",
+    desc: "منصة تعليم إلكتروني حديثة لعرض الكورسات ومسارات التعلم وآراء الطلاب.",
+    challengeTitle: "التحدي", challenge: "منصة تعليمية تحتاج واجهة ملهمة تعرض الكورسات بشكل جذاب وتبني ثقة الطلاب.",
+    solutionTitle: "الحل", solution: "تصميم بنفسجي عصري مع أقسام للكورسات والمسارات وشريط آراء متحرك وتنقل SPA.",
+    featuresTitle: "الميزات", f1: "عرض الكورسات والمسارات", f2: "شريط آراء الطلاب (Carousel)", f3: "حركات وتأثيرات بصرية", f4: "دعم العربية والإنجليزية",
+    liveDemo: "عرض النموذج الحي", contact: "اطلب مشروعاً مشابهاً", footer: "© 2025 Veloce Lab — نموذج عرض ضمن المعرض"
+  },
+  en: {
+    pageTitle: "LearnFlow — Veloce Lab",
+    back: "← Back to Portfolio", demo: "Portfolio Demo",
+    desc: "A modern e-learning platform showcasing courses, learning paths, and student testimonials.",
+    challengeTitle: "Challenge", challenge: "An education platform needed an inspiring UI that presents courses attractively and builds student trust.",
+    solutionTitle: "Solution", solution: "A modern purple-themed design with course sections, learning paths, animated testimonials carousel, and SPA navigation.",
+    featuresTitle: "Features", f1: "Courses and learning paths", f2: "Student testimonials carousel", f3: "Visual animations", f4: "Arabic and English support",
+    liveDemo: "View Live Demo", contact: "Request a similar project", footer: "© 2025 Veloce Lab — Portfolio demo"
+  }
+});
+</script>
+</body>
+</html>

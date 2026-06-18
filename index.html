@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مختبر فيلوشي — حلول تقنية تعمل بسرعة وذكاء</title>
+<meta name="description" content="Veloce Lab — معرض أعمال يضم نماذج تفاعلية لمواقع عيادات، سياحة، تعليم، مطاعم، ومتاجر إلكترونية.">
+<meta property="og:title" content="Veloce Lab — Portfolio">
+<meta property="og:description" content="نماذج تفاعلية جاهزة للاستعراض — مواقع وأنظمة ويب احترافية">
+<meta property="og:image" content="logo.png">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;
+  --bg2:#111118;
+  --bg3:#1a1a24;
+  --surface:#16161f;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#f0f0f5;
+  --muted:#8888aa;
+  --accent:#6c63ff;
+  --accent2:#a78bfa;
+  --green:#22d3a0;
+  --orange:#f97316;
+  --pink:#e879f9;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.85rem 1.25rem;background:rgba(10,10,15,0.88);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.logo-text{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:-0.5px}
+.logo-text span{color:var(--accent2)}
+.logo-link{display:flex;align-items:center;gap:0.55rem;text-decoration:none;color:inherit;flex-shrink:0;z-index:102}
+.logo-img{height:34px;width:auto;display:block}
+.nav-menu{display:flex;align-items:center;flex:1;justify-content:center}
+.nav-actions{display:flex;align-items:center;gap:0.65rem;z-index:102;flex-shrink:0}
+.lang-toggle{display:inline-flex;align-items:center;gap:0;border:0.5px solid var(--border2);border-radius:999px;padding:3px;background:var(--surface);cursor:pointer;font-family:inherit}
+.lang-opt{padding:0.35rem 0.65rem;border-radius:999px;font-size:0.72rem;font-weight:600;color:var(--muted);background:transparent;border:none;cursor:pointer;transition:all 0.25s;line-height:1}
+.lang-opt.active{background:var(--accent);color:#fff}
+.menu-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;border:0.5px solid var(--border2);border-radius:12px;background:var(--surface);cursor:pointer;padding:0;transition:border-color 0.2s}
+.menu-toggle:hover{border-color:var(--accent2)}
+.menu-toggle .bar{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;margin:0 auto;transition:all 0.3s ease}
+.menu-toggle.open .bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-toggle.open .bar:nth-child(2){opacity:0;transform:scaleX(0)}
+.menu-toggle.open .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.9rem;transition:color 0.2s;white-space:nowrap}
+.nav-links a:hover{color:var(--text)}
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:99;opacity:0;transition:opacity 0.3s;pointer-events:none}
+.nav-overlay.visible{opacity:1;pointer-events:auto}
+body.menu-open{overflow:hidden}
+
+@media(max-width:768px){
+  nav{padding:0.75rem 1rem}
+  .nav-inner{gap:0.75rem}
+  .nav-menu{position:fixed;inset-inline:0;top:0;padding-top:4.5rem;padding-bottom:1.5rem;background:rgba(10,10,15,0.97);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--border);transform:translateY(-110%);opacity:0;visibility:hidden;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),opacity 0.3s,visibility 0.3s;z-index:101;justify-content:center;flex:none}
+  .nav-menu.open{transform:translateY(0);opacity:1;visibility:visible}
+  .nav-links{flex-direction:column;gap:0;width:100%;max-width:320px;padding:0 1.5rem}
+  .nav-links li{width:100%;border-bottom:0.5px solid var(--border)}
+  .nav-links li:last-child{border-bottom:none}
+  .nav-links a{display:block;padding:1rem 0.25rem;font-size:1.05rem;font-weight:500}
+  .nav-overlay{display:block}
+  .menu-toggle{display:flex}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(108,99,255,0.12);border:0.5px solid rgba(108,99,255,0.3);border-radius:999px;padding:0.4rem 1rem;font-size:0.8rem;color:var(--accent2);margin-bottom:2rem;animation:fadeUp 0.8s ease both}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;display:inline-block}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;letter-spacing:-1px;animation:fadeUp 0.8s 0.1s ease both}
+.hero h1 .line2{color:var(--accent2)}
+.hero p{max-width:520px;color:var(--muted);font-size:1.05rem;margin:1.5rem auto 2.5rem;animation:fadeUp 0.8s 0.2s ease both}
+.cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.8s 0.3s ease both}
+.btn-primary{background:var(--accent);color:#fff;padding:0.75rem 1.75rem;border-radius:999px;text-decoration:none;font-weight:500;font-size:0.95rem;transition:all 0.2s;border:none;cursor:pointer;display:inline-block}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);padding:0.75rem 1.75rem;border-radius:999px;text-decoration:none;font-weight:400;font-size:0.95rem;border:0.5px solid var(--border2);transition:all 0.2s;cursor:pointer;display:inline-block}
+.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* GRID BG */
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);pointer-events:none}
+
+/* STATS */
+.stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;animation:fadeUp 0.8s 0.4s ease both;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--text)}
+.stat-num span{color:var(--accent2)}
+.stat-label{font-size:0.8rem;color:var(--muted);margin-top:0.25rem}
+
+/* SECTIONS */
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-tag{font-size:0.75rem;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:0.75rem;font-weight:500}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;letter-spacing:-0.5px;margin-bottom:1rem}
+.section-sub{color:var(--muted);max-width:500px;margin-bottom:3rem}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.service-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.3s;cursor:default;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(108,99,255,0.06),transparent 60%);opacity:0;transition:opacity 0.3s}
+.service-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.service-card:hover::before{opacity:1}
+.service-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.15rem}
+.icon-purple{background:rgba(108,99,255,0.15);color:var(--accent2)}
+.icon-green{background:rgba(34,211,160,0.12);color:var(--green)}
+.icon-orange{background:rgba(249,115,22,0.12);color:var(--orange)}
+.icon-pink{background:rgba(232,121,249,0.12);color:var(--pink)}
+.service-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.5rem}
+.service-card p{font-size:0.88rem;color:var(--muted);line-height:1.6}
+.service-tag{display:inline-block;margin-top:1rem;font-size:0.75rem;color:var(--accent2);background:rgba(108,99,255,0.1);border-radius:999px;padding:0.25rem 0.75rem}
+
+/* PORTFOLIO */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.project-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.project-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.demo-link{display:inline-flex;align-items:center;gap:0.35rem;margin-top:1rem;font-size:0.8rem;font-weight:600;color:var(--accent2);transition:gap 0.2s}
+.project-card:hover .demo-link{gap:0.55rem}
+html[dir="ltr"] .demo-link .fa-arrow-left{transform:scaleX(-1)}
+.project-preview{height:200px;position:relative;overflow:hidden;background:var(--bg3)}
+.preview-img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .45s ease}
+.project-card:hover .preview-img{transform:scale(1.06)}
+.preview-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.55),transparent 45%)}
+.demo-badge-card{position:absolute;bottom:10px;inset-inline-start:10px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 9px;border-radius:999px;background:rgba(10,10,15,.75);border:0.5px solid rgba(108,99,255,.35);color:var(--accent2);backdrop-filter:blur(6px)}
+.project-info{padding:1.25rem}
+.project-info h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-bottom:0.4rem}
+.project-info p{font-size:0.85rem;color:var(--muted);margin-bottom:1rem}
+.tech-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tech-tag{font-size:0.72rem;background:var(--bg3);border:0.5px solid var(--border);border-radius:6px;padding:0.2rem 0.6rem;color:var(--muted)}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.price-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.3s}
+.price-card.featured{border-color:rgba(108,99,255,0.4);background:rgba(108,99,255,0.05)}
+.price-badge{display:inline-block;background:var(--accent);color:#fff;font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:999px;margin-bottom:1rem}
+.price-name{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-bottom:0.5rem}
+.price-amount{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin:0.75rem 0}
+.price-amount small{font-size:0.85rem;color:var(--muted);font-weight:400}
+.price-features{list-style:none;margin:1rem 0 1.5rem}
+.price-features li{font-size:0.85rem;color:var(--muted);padding:0.35rem 0;display:flex;align-items:center;gap:0.5rem}
+.check{color:var(--green);font-size:0.75rem}
+
+/* CONTACT */
+.contact-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:20px;padding:3rem;text-align:center;position:relative;overflow:hidden}
+.contact-wrap::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(108,99,255,0.05),transparent 60%);pointer-events:none}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.contact-link{display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.25rem;border:0.5px solid var(--border2);border-radius:999px;text-decoration:none;color:var(--text);font-size:0.9rem;transition:all 0.2s}
+.contact-link:hover{border-color:var(--accent2);color:var(--accent2)}
+.contact-link i{font-size:1rem}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:0.85rem}
+footer i{color:var(--accent2);margin-inline-start:0.25rem}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .preview-img,.project-card:hover .preview-img,.btn-primary:hover,.btn-ghost:hover,.service-card:hover,.project-card:hover{transform:none;transition:none}
+  .dot{animation:none}
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+@keyframes widthPulse{from{opacity:0.5}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo-link">
+      <img src="logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">Veloce<span>Lab</span></span>
+    </a>
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links">
+        <li><a href="#services" data-i18n="nav.services">الخدمات</a></li>
+        <li><a href="#portfolio" data-i18n="nav.portfolio">الأعمال</a></li>
+        <li><a href="#pricing" data-i18n="nav.pricing">الأسعار</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="القائمة" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-tag"><span class="dot"></span> <span data-i18n="hero.tag">متاح للمشاريع الجديدة</span></div>
+  <h1 data-i18n-html="hero.title">حلول تقنية تعمل<br><span class="line2">بسرعة وذكاء</span></h1>
+  <p data-i18n="hero.subtitle">من مواقع الشركات إلى الأنظمة المتكاملة — نبني منتجات رقمية تحل مشاكل حقيقية وتعمل من اليوم الأول</p>
+  <div class="cta-group">
+    <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1">استعرض أعمالنا</a>
+    <a href="#contact" class="btn-ghost" data-i18n="hero.cta2">تواصل معنا</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">5<span>+</span></div><div class="stat-label" data-i18n="stats.systems">نماذج جاهزة</div></div>
+    <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label" data-i18n="stats.experience">سنوات خبرة</div></div>
+    <div class="stat"><div class="stat-num">100<span>%</span></div><div class="stat-label" data-i18n="stats.delivered">مشاريع مُسلَّمة</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="services.tag">ماذا نقدّم</div>
+    <h2 class="section-title" data-i18n="services.title">خدمات لكل حجم</h2>
+    <p class="section-sub" data-i18n="services.sub">سواء كنت صاحب محلّ صغير أو شركة متوسطة، لدينا الحل المناسب لك</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon icon-purple"><i class="fa-solid fa-globe"></i></div>
+      <h3 data-i18n="services.s1.title">مواقع الشركات والخدمات</h3>
+      <p data-i18n="services.s1.desc">موقع احترافي يعرض خدماتك ويجذب العملاء — سريع وسهل الاستخدام</p>
+      <span class="service-tag" data-i18n="services.s1.price">من 150 دولاراً</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-green"><i class="fa-solid fa-bolt"></i></div>
+      <h3 data-i18n="services.s2.title">صفحات هبوط تسويقية</h3>
+      <p data-i18n="services.s2.desc">صفحة هبوط مقنعة تحوّل الزوار إلى عملاء — مع نموذج تواصل وتصميم احترافي</p>
+      <span class="service-tag" data-i18n="services.s2.price">من 80 دولاراً</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-orange"><i class="fa-solid fa-desktop"></i></div>
+      <h3 data-i18n="services.s3.title">أنظمة وبرمجيات مخصّصة</h3>
+      <p data-i18n="services.s3.desc">نقاط بيع، أنظمة حجز، إدارة، قوائم رقمية — نظام يُناسب عملك تحديداً</p>
+      <span class="service-tag" data-i18n="services.s3.price">حسب المشروع</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon icon-pink"><i class="fa-solid fa-plug"></i></div>
+      <h3 data-i18n="services.s4.title">واجهات برمجة وتكاملات</h3>
+      <p data-i18n="services.s4.desc">ربط أنظمتك ببعضها أو بخدمات خارجية — واجهات RESTful وتوثيق كامل</p>
+      <span class="service-tag" data-i18n="services.s4.price">حسب المشروع</span>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="portfolio.tag">أعمالنا</div>
+    <h2 class="section-title" data-i18n="portfolio.title">نماذج تفاعلية</h2>
+    <p class="section-sub" data-i18n="portfolio.sub">نماذج جاهزة للاستعراض — اضغط على أي مشروع لرؤية التفاصيل ثم جرّب النموذج الحي</p>
+  </div>
+  <div class="portfolio-grid reveal">
+
+    <a href="projects/clinic.html" class="project-card">
+      <div class="project-preview">
+        <img src="assets/clinic.png" alt="MediCare Clinic" class="preview-img" loading="lazy">
+        <div class="preview-overlay"></div>
+        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+      </div>
+      <div class="project-info">
+        <h3 data-i18n="projects.p1.title">MediCare Clinic</h3>
+        <p data-i18n="projects.p1.desc">موقع عيادة طبية متكامل — حجز مواعيد، عرض الأطباء، والخدمات الطبية</p>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">Tailwind</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+      </div>
+    </a>
+
+    <a href="projects/travil.html" class="project-card">
+      <div class="project-preview">
+        <img src="assets/travel.png" alt="Wander Syria" class="preview-img" loading="lazy">
+        <div class="preview-overlay"></div>
+        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+      </div>
+      <div class="project-info">
+        <h3 data-i18n="projects.p2.title">Wander Syria</h3>
+        <p data-i18n="projects.p2.desc">منصة سياحة وحجز رحلات — وجهات، جولات، وحجز تفاعلي</p>
+        <div class="tech-tags">
+          <span class="tech-tag">SPA</span>
+          <span class="tech-tag">Tailwind</span>
+          <span class="tech-tag">i18n</span>
+        </div>
+        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+      </div>
+    </a>
+
+    <a href="projects/educational.html" class="project-card">
+      <div class="project-preview">
+        <img src="assets/educational.png" alt="LearnFlow" class="preview-img" loading="lazy">
+        <div class="preview-overlay"></div>
+        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+      </div>
+      <div class="project-info">
+        <h3 data-i18n="projects.p3.title">LearnFlow</h3>
+        <p data-i18n="projects.p3.desc">منصة تعليم إلكتروني — كورسات، مسارات تعلم، وآراء الطلاب</p>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">Tailwind</span>
+          <span class="tech-tag">Animations</span>
+        </div>
+        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+      </div>
+    </a>
+
+    <a href="projects/brew-bites.html" class="project-card">
+      <div class="project-preview">
+        <img src="assets/Brew%20%26%20Bites.png" alt="Brew &amp; Bites" class="preview-img" loading="lazy">
+        <div class="preview-overlay"></div>
+        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+      </div>
+      <div class="project-info">
+        <h3 data-i18n="projects.p4.title">Brew &amp; Bites</h3>
+        <p data-i18n="projects.p4.desc">موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Tailwind</span>
+          <span class="tech-tag">Drawer UI</span>
+          <span class="tech-tag">i18n</span>
+        </div>
+        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+      </div>
+    </a>
+
+    <a href="projects/shopnest.html" class="project-card">
+      <div class="project-preview">
+        <img src="assets/store.png" alt="ShopNest" class="preview-img" loading="lazy">
+        <div class="preview-overlay"></div>
+        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+      </div>
+      <div class="project-info">
+        <h3 data-i18n="projects.p5.title">ShopNest</h3>
+        <p data-i18n="projects.p5.desc">متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء</p>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="pricing.tag">الأسعار</div>
+    <h2 class="section-title" data-i18n="pricing.title">واضح ومباشر</h2>
+    <p class="section-sub" data-i18n="pricing.sub">لا مفاجآت — تعرف ما ستدفعه منذ البداية</p>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="price-card">
+      <div class="price-name" data-i18n="pricing.p1.name">صفحة هبوط</div>
+      <div class="price-amount">80$ <small>– 150$</small></div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f1">تصميم احترافي</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f2">نموذج تواصل</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f3">متجاوب مع الجوال</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f4">سريع التحميل</span></li>
+      </ul>
+      <a href="#contact" class="btn-ghost" style="display:block;text-align:center" data-i18n="pricing.order">اطلب الآن</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge" data-i18n="pricing.popular">الأكثر طلباً</div>
+      <div class="price-name" data-i18n="pricing.p2.name">موقع شركة / خدمات</div>
+      <div class="price-amount">200$ <small>– 500$</small></div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p2.f1">عدة صفحات</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p2.f2">لوحة تحكم بسيطة</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p2.f3">تحسين محركات البحث الأساسي</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p2.f4">دعم بعد التسليم</span></li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center" data-i18n="pricing.order">اطلب الآن</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name" data-i18n="pricing.p3.name">نظام مخصّص</div>
+      <div class="price-amount" style="font-size:1.5rem" data-i18n="pricing.p3.price">حسب المشروع</div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p3.f1">تحليل المتطلبات</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p3.f2">تطوير كامل</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p3.f3">واجهة برمجة + لوحة تحكم</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p3.f4">صيانة مستمرة</span></li>
+      </ul>
+      <a href="#contact" class="btn-ghost" style="display:block;text-align:center" data-i18n="pricing.talk">تحدّث معنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap reveal">
+    <div class="section-tag" style="text-align:center" data-i18n="contact.tag">تواصل</div>
+    <h2 class="section-title" style="text-align:center" data-i18n="contact.title">لنبنِ مشروعاً معاً</h2>
+    <p style="color:var(--muted);text-align:center;max-width:400px;margin:0 auto" data-i18n="contact.sub">هل لديك مشروع؟ سؤال؟ تريد معرفة ما يمكننا تقديمه؟ تواصل معنا</p>
+    <div class="contact-links">
+      <a href="https://wa.me/963xxxxxxxxx" class="contact-link"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact.whatsapp">واتساب</span></a>
+      <a href="mailto:hello@velocelab.com" class="contact-link"><i class="fa-solid fa-envelope"></i> <span data-i18n="contact.email">البريد الإلكتروني</span></a>
+      <a href="#" class="contact-link"><i class="fa-brands fa-facebook"></i> <span data-i18n="contact.facebook">فيسبوك</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-i18n-html="footer.text">© 2025 Veloce Lab — صُنع بشغف وببرمجة نظيفة <i class="fa-solid fa-rocket"></i></p>
+</footer>
+
+<script>
+const i18n = {
+  ar: {
+    pageTitle: 'مختبر فيلوشي — حلول تقنية تعمل بسرعة وذكاء',
+    menuLabel: 'القائمة',
+    'nav.services': 'الخدمات',
+    'nav.portfolio': 'الأعمال',
+    'nav.pricing': 'الأسعار',
+    'nav.contact': 'اتصل بنا',
+    'hero.tag': 'متاح للمشاريع الجديدة',
+    'hero.title': 'حلول تقنية تعمل<br><span class="line2">بسرعة وذكاء</span>',
+    'hero.subtitle': 'من مواقع الشركات إلى الأنظمة المتكاملة — نبني منتجات رقمية تحل مشاكل حقيقية وتعمل من اليوم الأول',
+    'hero.cta1': 'استعرض أعمالنا',
+    'hero.cta2': 'تواصل معنا',
+    'stats.systems': 'نماذج جاهزة',
+    'stats.experience': 'سنوات خبرة',
+    'stats.delivered': 'مشاريع مُسلَّمة',
+    'services.tag': 'ماذا نقدّم',
+    'services.title': 'خدمات لكل حجم',
+    'services.sub': 'سواء كنت صاحب محلّ صغير أو شركة متوسطة، لدينا الحل المناسب لك',
+    'services.s1.title': 'مواقع الشركات والخدمات',
+    'services.s1.desc': 'موقع احترافي يعرض خدماتك ويجذب العملاء — سريع وسهل الاستخدام',
+    'services.s1.price': 'من 150 دولاراً',
+    'services.s2.title': 'صفحات هبوط تسويقية',
+    'services.s2.desc': 'صفحة هبوط مقنعة تحوّل الزوار إلى عملاء — مع نموذج تواصل وتصميم احترافي',
+    'services.s2.price': 'من 80 دولاراً',
+    'services.s3.title': 'أنظمة وبرمجيات مخصّصة',
+    'services.s3.desc': 'نقاط بيع، أنظمة حجز، إدارة، قوائم رقمية — نظام يُناسب عملك تحديداً',
+    'services.s3.price': 'حسب المشروع',
+    'services.s4.title': 'واجهات برمجة وتكاملات',
+    'services.s4.desc': 'ربط أنظمتك ببعضها أو بخدمات خارجية — واجهات RESTful وتوثيق كامل',
+    'services.s4.price': 'حسب المشروع',
+    'portfolio.tag': 'أعمالنا',
+    'portfolio.title': 'نماذج تفاعلية',
+    'portfolio.sub': 'نماذج جاهزة للاستعراض — اضغط على أي مشروع لرؤية التفاصيل ثم جرّب النموذج الحي',
+    'projects.badge': 'نموذج عرض',
+    'projects.demo': 'عرض التفاصيل',
+    'projects.p1.title': 'MediCare Clinic',
+    'projects.p1.desc': 'موقع عيادة طبية متكامل — حجز مواعيد، عرض الأطباء، والخدمات الطبية',
+    'projects.p2.title': 'Wander Syria',
+    'projects.p2.desc': 'منصة سياحة وحجز رحلات — وجهات، جولات، وحجز تفاعلي',
+    'projects.p3.title': 'LearnFlow',
+    'projects.p3.desc': 'منصة تعليم إلكتروني — كورسات، مسارات تعلم، وآراء الطلاب',
+    'projects.p4.title': 'Brew & Bites',
+    'projects.p4.desc': 'موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة',
+    'projects.p5.title': 'ShopNest',
+    'projects.p5.desc': 'متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء',
+    'pricing.tag': 'الأسعار',
+    'pricing.title': 'واضح ومباشر',
+    'pricing.sub': 'لا مفاجآت — تعرف ما ستدفعه منذ البداية',
+    'pricing.p1.name': 'صفحة هبوط',
+    'pricing.p1.f1': 'تصميم احترافي',
+    'pricing.p1.f2': 'نموذج تواصل',
+    'pricing.p1.f3': 'متجاوب مع الجوال',
+    'pricing.p1.f4': 'سريع التحميل',
+    'pricing.popular': 'الأكثر طلباً',
+    'pricing.p2.name': 'موقع شركة / خدمات',
+    'pricing.p2.f1': 'عدة صفحات',
+    'pricing.p2.f2': 'لوحة تحكم بسيطة',
+    'pricing.p2.f3': 'تحسين محركات البحث الأساسي',
+    'pricing.p2.f4': 'دعم بعد التسليم',
+    'pricing.p3.name': 'نظام مخصّص',
+    'pricing.p3.price': 'حسب المشروع',
+    'pricing.p3.f1': 'تحليل المتطلبات',
+    'pricing.p3.f2': 'تطوير كامل',
+    'pricing.p3.f3': 'واجهة برمجة + لوحة تحكم',
+    'pricing.p3.f4': 'صيانة مستمرة',
+    'pricing.order': 'اطلب الآن',
+    'pricing.talk': 'تحدّث معنا',
+    'contact.tag': 'تواصل',
+    'contact.title': 'لنبنِ مشروعاً معاً',
+    'contact.sub': 'هل لديك مشروع؟ سؤال؟ تريد معرفة ما يمكننا تقديمه؟ تواصل معنا',
+    'contact.whatsapp': 'واتساب',
+    'contact.email': 'البريد الإلكتروني',
+    'contact.facebook': 'فيسبوك',
+    'footer.text': '© 2025 Veloce Lab — صُنع بشغف وببرمجة نظيفة <i class="fa-solid fa-rocket"></i>'
+  },
+  en: {
+    pageTitle: 'Veloce Lab — Fast, Smart Tech Solutions',
+    menuLabel: 'Menu',
+    'nav.services': 'Services',
+    'nav.portfolio': 'Portfolio',
+    'nav.pricing': 'Pricing',
+    'nav.contact': 'Contact',
+    'hero.tag': 'Available for new projects',
+    'hero.title': 'Tech solutions that work<br><span class="line2">fast and smart</span>',
+    'hero.subtitle': 'From corporate websites to integrated systems — we build digital products that solve real problems and work from day one',
+    'hero.cta1': 'View our work',
+    'hero.cta2': 'Get in touch',
+    'stats.systems': 'Ready demos',
+    'stats.experience': 'Years of experience',
+    'stats.delivered': 'Projects delivered',
+    'services.tag': 'What we offer',
+    'services.title': 'Services for every scale',
+    'services.sub': 'Whether you run a small shop or a mid-size company, we have the right solution for you',
+    'services.s1.title': 'Corporate & service websites',
+    'services.s1.desc': 'A professional site that showcases your services and attracts clients — fast and easy to use',
+    'services.s1.price': 'From $150',
+    'services.s2.title': 'Marketing landing pages',
+    'services.s2.desc': 'A compelling landing page that turns visitors into customers — with a contact form and polished design',
+    'services.s2.price': 'From $80',
+    'services.s3.title': 'Custom systems & software',
+    'services.s3.desc': 'POS, booking systems, management, digital menus — a system tailored to your business',
+    'services.s3.price': 'Project-based',
+    'services.s4.title': 'APIs & integrations',
+    'services.s4.desc': 'Connect your systems together or with external services — RESTful APIs and full documentation',
+    'services.s4.price': 'Project-based',
+    'portfolio.tag': 'Our work',
+    'portfolio.title': 'Interactive Demos',
+    'portfolio.sub': 'Ready-to-explore demos — click any project for details, then try the live version',
+    'projects.badge': 'Portfolio Demo',
+    'projects.demo': 'View Details',
+    'projects.p1.title': 'MediCare Clinic',
+    'projects.p1.desc': 'Full medical clinic website — appointments, doctors, and healthcare services',
+    'projects.p2.title': 'Wander Syria',
+    'projects.p2.desc': 'Travel and booking platform — destinations, tours, and interactive booking',
+    'projects.p3.title': 'LearnFlow',
+    'projects.p3.desc': 'E-learning platform — courses, learning paths, and student testimonials',
+    'projects.p4.title': 'Brew & Bites',
+    'projects.p4.desc': 'Restaurant and café website — menu, reservations, and warm visual experience',
+    'projects.p5.title': 'ShopNest',
+    'projects.p5.desc': 'Modern e-commerce store — products, shopping cart, and bold design',
+    'pricing.tag': 'Pricing',
+    'pricing.title': 'Clear and straightforward',
+    'pricing.sub': 'No surprises — you know what you pay from the start',
+    'pricing.p1.name': 'Landing page',
+    'pricing.p1.f1': 'Professional design',
+    'pricing.p1.f2': 'Contact form',
+    'pricing.p1.f3': 'Mobile responsive',
+    'pricing.p1.f4': 'Fast loading',
+    'pricing.popular': 'Most popular',
+    'pricing.p2.name': 'Company / services website',
+    'pricing.p2.f1': 'Multiple pages',
+    'pricing.p2.f2': 'Simple admin panel',
+    'pricing.p2.f3': 'Basic SEO',
+    'pricing.p2.f4': 'Post-delivery support',
+    'pricing.p3.name': 'Custom system',
+    'pricing.p3.price': 'Project-based',
+    'pricing.p3.f1': 'Requirements analysis',
+    'pricing.p3.f2': 'Full development',
+    'pricing.p3.f3': 'API + dashboard',
+    'pricing.p3.f4': 'Ongoing maintenance',
+    'pricing.order': 'Order now',
+    'pricing.talk': 'Talk to us',
+    'contact.tag': 'Contact',
+    'contact.title': "Let's build something together",
+    'contact.sub': 'Have a project? A question? Want to know what we can do? Get in touch',
+    'contact.whatsapp': 'WhatsApp',
+    'contact.email': 'Email',
+    'contact.facebook': 'Facebook',
+    'footer.text': '© 2025 Veloce Lab — Built with passion and clean code <i class="fa-solid fa-rocket"></i>'
+  }
+};
+
+let currentLang = localStorage.getItem('veloce-lang') || 'ar';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('veloce-lang', lang);
+  const t = i18n[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.title = t.pageTitle;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t[el.dataset.i18n];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t[el.dataset.i18nHtml];
+  });
+  document.querySelectorAll('.lang-opt').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  document.getElementById('menuToggle').setAttribute('aria-label', t.menuLabel);
+}
+
+document.querySelectorAll('.lang-opt').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.lang));
+});
+
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+const navOverlay = document.getElementById('navOverlay');
+
+function closeMenu() {
+  menuToggle.classList.remove('open');
+  navMenu.classList.remove('open');
+  navOverlay.classList.remove('visible');
+  document.body.classList.remove('menu-open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}
+
+function openMenu() {
+  menuToggle.classList.add('open');
+  navMenu.classList.add('open');
+  navOverlay.classList.add('visible');
+  document.body.classList.add('menu-open');
+  menuToggle.setAttribute('aria-expanded', 'true');
+}
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.contains('open') ? closeMenu() : openMenu();
+});
+navOverlay.addEventListener('click', closeMenu);
+navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+    }
+  });
+}, {threshold: 0.1});
+reveals.forEach(el => observer.observe(el));
+
+setLang(currentLang);
+</script>
+
+</body>
+</html>

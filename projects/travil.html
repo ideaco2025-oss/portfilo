@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wander Syria — Veloce Lab</title>
+<meta name="description" content="نموذج منصة سياحة وحجز رحلات — وجهات، جولات، وحجز تفاعلي">
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../veloce-lab-portfolio.html" class="logo-link">
+      <img src="../logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">VeloceLab</span>
+    </a>
+    <div class="nav-actions">
+      <a href="../veloce-lab-portfolio.html#portfolio" class="back-nav" data-i18n="back">→ العودة للمعرض</a>
+      <div class="lang-toggle">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="demo-pill" data-i18n="demo">نموذج عرض</span>
+  <h1 class="page-title">Wander Syria</h1>
+  <p class="page-desc" data-i18n="desc">منصة سياحة تفاعلية لاستكشاف الوجهات وحجز الجولات السياحية.</p>
+
+  <div class="hero-shot">
+    <img src="../assets/travel.png" alt="Wander Syria preview" loading="lazy">
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3 data-i18n="challengeTitle">التحدي</h3>
+      <p data-i18n="challenge">وكالة السفر تحتاج منصة تجمع الوجهات والجولات في تجربة واحدة جذابة وسهلة التصفح.</p>
+    </div>
+    <div class="detail-card">
+      <h3 data-i18n="solutionTitle">الحل</h3>
+      <p data-i18n="solution">تطبيق صفحة واحدة (SPA) بتصميم رومانسي، مع تنقل سلس بين الوجهات والجولات ونموذج تواصل.</p>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3 data-i18n="featuresTitle">الميزات</h3>
+    <ul class="feature-list">
+      <li data-i18n="f1">تصفح الوجهات والجولات</li>
+      <li data-i18n="f2">مسار رحلة تفاعلي (Timeline)</li>
+      <li data-i18n="f3">تأثيرات Scroll Reveal</li>
+      <li data-i18n="f4">دعم ثنائي اللغة</li>
+    </ul>
+  </div>
+
+  <div class="tech-row">
+    <span class="tech-tag">SPA</span>
+    <span class="tech-tag">Tailwind CSS</span>
+    <span class="tech-tag">JavaScript</span>
+    <span class="tech-tag">i18n</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="../travil.html" class="btn-primary" data-i18n="liveDemo">عرض النموذج الحي</a>
+    <a href="../veloce-lab-portfolio.html#contact" class="btn-ghost" data-i18n="contact">اطلب مشروعاً مشابهاً</a>
+  </div>
+</main>
+
+<footer><span data-i18n="footer">© 2025 Veloce Lab — نموذج عرض ضمن المعرض</span></footer>
+
+<script src="project.js"></script>
+<script>
+initProjectPage({
+  ar: {
+    pageTitle: "Wander Syria — Veloce Lab",
+    back: "→ العودة للمعرض", demo: "نموذج عرض",
+    desc: "منصة سياحة تفاعلية لاستكشاف الوجهات وحجز الجولات السياحية.",
+    challengeTitle: "التحدي", challenge: "وكالة السفر تحتاج منصة تجمع الوجهات والجولات في تجربة واحدة جذابة وسهلة التصفح.",
+    solutionTitle: "الحل", solution: "تطبيق صفحة واحدة (SPA) بتصميم رومانسي، مع تنقل سلس بين الوجهات والجولات ونموذج تواصل.",
+    featuresTitle: "الميزات", f1: "تصفح الوجهات والجولات", f2: "مسار رحلة تفاعلي (Timeline)", f3: "تأثيرات Scroll Reveal", f4: "دعم ثنائي اللغة",
+    liveDemo: "عرض النموذج الحي", contact: "اطلب مشروعاً مشابهاً", footer: "© 2025 Veloce Lab — نموذج عرض ضمن المعرض"
+  },
+  en: {
+    pageTitle: "Wander Syria — Veloce Lab",
+    back: "← Back to Portfolio", demo: "Portfolio Demo",
+    desc: "An interactive tourism platform to explore destinations and book guided tours.",
+    challengeTitle: "Challenge", challenge: "The travel agency needed one platform combining destinations and tours in an attractive, easy-to-browse experience.",
+    solutionTitle: "Solution", solution: "A single-page app with romantic styling, smooth navigation between destinations and tours, plus a contact form.",
+    featuresTitle: "Features", f1: "Browse destinations and tours", f2: "Interactive trip timeline", f3: "Scroll reveal animations", f4: "Bilingual support",
+    liveDemo: "View Live Demo", contact: "Request a similar project", footer: "© 2025 Veloce Lab — Portfolio demo"
+  }
+});
+</script>
+</body>
+</html>

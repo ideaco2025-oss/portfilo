@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Bites — Veloce Lab</title>
+<meta name="description" content="نموذج موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة">
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../veloce-lab-portfolio.html" class="logo-link">
+      <img src="../logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">VeloceLab</span>
+    </a>
+    <div class="nav-actions">
+      <a href="../veloce-lab-portfolio.html#portfolio" class="back-nav" data-i18n="back">→ العودة للمعرض</a>
+      <div class="lang-toggle">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="demo-pill" data-i18n="demo">نموذج عرض</span>
+  <h1 class="page-title">Brew & Bites</h1>
+  <p class="page-desc" data-i18n="desc">موقع مطعم وكافيه بتصميم دافئ يعرض القائمة ويتيح الحجوزات.</p>
+
+  <div class="hero-shot">
+    <img src="../assets/Brew%20%26%20Bites.png" alt="Brew & Bites preview" loading="lazy">
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3 data-i18n="challengeTitle">التحدي</h3>
+      <p data-i18n="challenge">المطعم يحتاج موقعاً يعكس أجواء القهوة والدفء ويعرض القائمة بطريقة تفتح الشهية.</p>
+    </div>
+    <div class="detail-card">
+      <h3 data-i18n="solutionTitle">الحل</h3>
+      <p data-i18n="solution">تصميم بني وذهبي كلاسيكي مع قائمة طعام منزلقة (Drawer) ونموذج حجز طاولات.</p>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3 data-i18n="featuresTitle">الميزات</h3>
+    <ul class="feature-list">
+      <li data-i18n="f1">قائمة طعام تفاعلية</li>
+      <li data-i18n="f2">حجز طاولات</li>
+      <li data-i18n="f3">شاشة افتتاحية (Loader)</li>
+      <li data-i18n="f4">دعم ثنائي اللغة</li>
+    </ul>
+  </div>
+
+  <div class="tech-row">
+    <span class="tech-tag">Tailwind CSS</span>
+    <span class="tech-tag">Drawer UI</span>
+    <span class="tech-tag">JavaScript</span>
+    <span class="tech-tag">i18n</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="../Brew%20%26%20Bites.html" class="btn-primary" data-i18n="liveDemo">عرض النموذج الحي</a>
+    <a href="../veloce-lab-portfolio.html#contact" class="btn-ghost" data-i18n="contact">اطلب مشروعاً مشابهاً</a>
+  </div>
+</main>
+
+<footer><span data-i18n="footer">© 2025 Veloce Lab — نموذج عرض ضمن المعرض</span></footer>
+
+<script src="project.js"></script>
+<script>
+initProjectPage({
+  ar: {
+    pageTitle: "Brew & Bites — Veloce Lab",
+    back: "→ العودة للمعرض", demo: "نموذج عرض",
+    desc: "موقع مطعم وكافيه بتصميم دافئ يعرض القائمة ويتيح الحجوزات.",
+    challengeTitle: "التحدي", challenge: "المطعم يحتاج موقعاً يعكس أجواء القهوة والدفء ويعرض القائمة بطريقة تفتح الشهية.",
+    solutionTitle: "الحل", solution: "تصميم بني وذهبي كلاسيكي مع قائمة طعام منزلقة (Drawer) ونموذج حجز طاولات.",
+    featuresTitle: "الميزات", f1: "قائمة طعام تفاعلية", f2: "حجز طاولات", f3: "شاشة افتتاحية (Loader)", f4: "دعم ثنائي اللغة",
+    liveDemo: "عرض النموذج الحي", contact: "اطلب مشروعاً مشابهاً", footer: "© 2025 Veloce Lab — نموذج عرض ضمن المعرض"
+  },
+  en: {
+    pageTitle: "Brew & Bites — Veloce Lab",
+    back: "← Back to Portfolio", demo: "Portfolio Demo",
+    desc: "A warm restaurant and café website with menu display and table reservations.",
+    challengeTitle: "Challenge", challenge: "The restaurant needed a site that reflects coffee-house warmth and presents the menu appetizingly.",
+    solutionTitle: "Solution", solution: "Classic brown-and-gold styling with a slide-out menu drawer and table reservation form.",
+    featuresTitle: "Features", f1: "Interactive food menu", f2: "Table reservations", f3: "Opening loader screen", f4: "Bilingual support",
+    liveDemo: "View Live Demo", contact: "Request a similar project", footer: "© 2025 Veloce Lab — Portfolio demo"
+  }
+});
+</script>
+</body>
+</html>

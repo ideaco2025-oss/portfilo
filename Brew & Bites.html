@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Bites</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --espresso: #1a1208;
+            --roasted: #2d1f0e;
+            --amber: #c8922a;
+            --cream: #f5f0e8;
+            --gold-muted: #8b6914;
+        }
+        
+        body {
+            background-color: var(--espresso);
+            color: var(--cream);
+            font-family: 'Cairo', 'DM Sans', sans-serif;
+        }
+
+        .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--espresso);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--amber);
+            border-radius: 10px;
+        }
+
+        .portfolio-back {
+            position: fixed;
+            top: 5.5rem;
+            inset-inline-start: 1rem;
+            z-index: 50;
+            padding: 0.45rem 1.1rem;
+            border-radius: 4px;
+            border: 1px solid rgba(200, 146, 42, 0.5);
+            background: rgba(26, 18, 8, 0.92);
+            backdrop-filter: blur(8px);
+            color: #c8922a;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            letter-spacing: 0.03em;
+        }
+        .portfolio-back:hover {
+            background: #c8922a;
+            color: #1a1208;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <a href="veloce-lab-portfolio.html" class="portfolio-back" data-key="back-portfolio">→ العودة للمعرض</a>
+
+    <!-- الشاشة الافتتاحية السلسة (Loader) -->
+    <div id="loader" class="fixed inset-0 bg-[#1a1208] z-[100] flex items-center justify-center transition-opacity duration-700">
+        <div class="text-center">
+            <!-- لوغو الـ SVG في الشاشة الافتتاحية -->
+            <svg class="w-16 h-16 mx-auto mb-4 text-[#c8922a] animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 14a6 6 0 0110.004-4.475C16.545 7.151 18.665 5 21 5v3c-1.335 0-2.33 1-2.5 2.5a6 6 0 01-6.5 5.975V19a2 2 0 01-2 2H7a2 2 0 01-2-2v-5z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 3c-.5 1-1.5 1.5-2 2.5M11 2c-.3 1-1 1.5-1.5 2.5M17 4c-.3 1-1 1.5-1.5 2.5"></path>
+            </svg>
+            <h1 class="brand-font text-4xl md:text-6xl text-[#c8922a]">Brew & Bites</h1>
+        </div>
+    </div>
+
+    <!-- الهيدر ونظام التنقل -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-[#1a1208]/90 backdrop-blur-md border-b border-[#2d1f0e] transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            
+            <!-- اللوغو مدمج مع الاسم بشكل متناسق -->
+            <a href="#" class="flex items-center gap-2 brand-font text-xl md:text-2xl font-bold text-[#c8922a] tracking-wide">
+                <svg class="w-8 h-8 text-[#c8922a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 14a6 6 0 0110.004-4.475C16.545 7.151 18.665 5 21 5v3c-1.335 0-2.33 1-2.5 2.5a6 6 0 01-6.5 5.975V19a2 2 0 01-2 2H7a2 2 0 01-2-2v-5z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 3c-.5 1-1.5 1.5-2 2.5M11 2c-.3 1-1 1.5-1.5 2.5M17 4c-.3 1-1 1.5-1.5 2.5"></path>
+                </svg>
+                <span>Brew & Bites</span>
+            </a>
+
+            <!-- القائمة للشاشات الكبيرة -->
+            <nav class="hidden md:flex items-center space-x-reverse space-x-8 text-sm font-medium">
+                <a href="#home" class="hover:text-[#c8922a] transition-colors duration-300" data-key="nav-home">الرئيسية</a>
+                <button onclick="toggleDrawer()" class="hover:text-[#c8922a] transition-colors duration-300" data-key="nav-menu">قائمة الطعام</button>
+                <a href="#about" class="hover:text-[#c8922a] transition-colors duration-300" data-key="nav-about">عن كافيه</a>
+                <a href="#reservations" class="hover:text-[#c8922a] transition-colors duration-300" data-key="nav-reservations">الحجوزات</a>
+                <a href="#contact" class="hover:text-[#c8922a] transition-colors duration-300" data-key="nav-contact">اتصل بنا</a>
+            </nav>
+
+            <!-- أزرار التحكم -->
+            <div class="flex items-center space-x-reverse space-x-4">
+                <span class="hidden sm:inline text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full border border-[#c8922a]/40 text-[#c8922a] bg-[#c8922a]/10" data-key="demo-badge">نموذج عرض</span>
+                <button onclick="toggleLanguage()" class="px-3 py-1.5 border border-[#c8922a] text-[#c8922a] text-xs rounded hover:bg-[#c8922a] hover:text-[#1a1208] transition-all duration-300 font-bold" id="langBtn">
+                    EN
+                </button>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden text-[#f5f0e8] focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- قائمة الجوال المنسدلة -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#2d1f0e] border-b border-[#c8922a]/20 px-4 py-4 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-sm hover:text-[#c8922a]" data-key="nav-home">الرئيسية</a>
+            <button onclick="toggleMobileMenu(); toggleDrawer();" class="block w-full text-right text-sm hover:text-[#c8922a]" data-key="nav-menu">قائمة الطعام</button>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sm hover:text-[#c8922a]" data-key="nav-about">عن كافيه</a>
+            <a href="#reservations" onclick="toggleMobileMenu()" class="block text-sm hover:text-[#c8922a]" data-key="nav-reservations">الحجوزات</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm hover:text-[#c8922a]" data-key="nav-contact">اتصل بنا</a>
+        </div>
+    </header>
+
+    <!-- قسم الـ Hero الرئيسي - تم استبدال الخلفية بصورة تعكس أجواء الإضاءة الدافئة والمظلمة للكافيه -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center px-4" style="background-image: linear-gradient(rgba(26, 18, 8, 0.85), rgba(26, 18, 8, 0.85)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1600');">
+        <div class="text-center max-w-3xl fade-in">
+            <span class="text-[#c8922a] uppercase tracking-widest text-xs md:text-sm font-bold block mb-3" data-key="hero-sub">مرحباً بكم في ملاذ القهوة</span>
+            <h2 class="brand-font text-4xl sm:text-6xl md:text-7xl font-bold mb-6 text-[#f5f0e8] leading-tight" data-key="hero-title">رائحة تجمعنا، ومذاق يأسرنا</h2>
+            <p class="text-sm md:text-lg text-[#f5f0e8]/70 mb-8 max-w-xl mx-auto" data-key="hero-desc">كل رشفة تحكي قصة حب، وكل طبق محضر بعناية من أجود المكونات الطازجة لتجربة لا تُنسى.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="toggleDrawer()" class="px-8 py-3 bg-[#c8922a] text-[#1a1208] font-bold rounded hover:bg-[#8b6914] transition-all duration-300" data-key="hero-btn-menu">اكتشف القائمة</button>
+                <a href="#reservations" class="px-8 py-3 border border-[#f5f0e8]/30 rounded hover:border-[#c8922a] hover:text-[#c8922a] transition-all duration-300 inline-block text-center" data-key="hero-btn-book">احجز طاولتك الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم "عن المطعم" About Section - صور تفصيلية للقهوة والمخبوزات بألوان البني الداكن المتناسقة -->
+    <section id="about" class="py-20 px-4 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+            <span class="text-[#c8922a] text-sm font-bold tracking-wider" data-key="about-badge">قصتنا</span>
+            <h2 class="brand-font text-3xl md:text-4xl font-bold" data-key="about-title">شغف بالتحميص والإتقان</h2>
+            <p class="text-[#f5f0e8]/80 leading-relaxed text-sm md:text-base" data-key="about-p1">بدأنا برؤية بسيطة: خلق مساحة مريحة تجمع بين عشاق القهوة الأصيلة والأطباق المبتكرة. في Brew & Bites، نحن لا نقدم الطعام والشراب فحسب، بل نصنع تجارب دافئة تلمس الحواس.</p>
+            <p class="text-[#f5f0e8]/60 text-sm" data-key="about-p2">نختار حبوب البن بعناية من مزارع مستدامة حول العالم، ونحمصها محلياً لضمان وصول النكهة الغنية والنقية إلى كوبك في كل صباح.</p>
+        </div>
+        <div class="relative grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=600" alt="Specialty Coffee Beans" class="rounded-lg shadow-xl transform translate-y-4 object-cover h-64 w-full">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600" alt="Pouring Filter Coffee" class="rounded-lg shadow-xl object-cover h-64 w-full">
+        </div>
+    </section>
+
+    <!-- قسم الحجوزات Reservations -->
+    <section id="reservations" class="py-20 bg-[#2d1f0e]/40 border-t border-b border-[#2d1f0e] px-4">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <h2 class="brand-font text-3xl md:text-4xl font-bold text-[#c8922a] mb-4" data-key="reserve-title">حجز طاولة</h2>
+            <p class="text-sm text-[#f5f0e8]/70" data-key="reserve-sub">خطط لأمسيتك الرائعة معنا بسهولة وسرعة</p>
+        </div>
+        <form class="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[#1a1208] p-6 md:p-10 rounded-xl border border-[#c8922a]/10 shadow-2xl">
+            <div>
+                <label class="block text-xs text-[#c8922a] mb-2 font-bold" data-key="form-name">الاسم الكامل</label>
+                <input type="text" class="w-full bg-[#2d1f0e] border border-[#f5f0e8]/10 rounded p-3 text-sm focus:outline-none focus:border-[#c8922a] text-[#f5f0e8]">
+            </div>
+            <div>
+                <label class="block text-xs text-[#c8922a] mb-2 font-bold" data-key="form-phone">رقم الهاتف</label>
+                <input type="tel" class="w-full bg-[#2d1f0e] border border-[#f5f0e8]/10 rounded p-3 text-sm focus:outline-none focus:border-[#c8922a] text-[#f5f0e8]">
+            </div>
+            <div>
+                <label class="block text-xs text-[#c8922a] mb-2 font-bold" data-key="form-guests">عدد الأفراد</label>
+                <select class="w-full bg-[#2d1f0e] border border-[#f5f0e8]/10 rounded p-3 text-sm focus:outline-none focus:border-[#c8922a] text-[#f5f0e8]">
+                    <option>1-2</option>
+                    <option>3-4</option>
+                    <option>5+</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs text-[#c8922a] mb-2 font-bold" data-key="form-date">التاريخ والوقت</label>
+                <input type="datetime-local" class="w-full bg-[#2d1f0e] border border-[#f5f0e8]/10 rounded p-3 text-sm focus:outline-none focus:border-[#c8922a] text-[#f5f0e8]">
+            </div>
+            <div class="sm:col-span-2 mt-4">
+                <button type="submit" class="w-full py-3 bg-[#c8922a] text-[#1a1208] font-bold rounded hover:bg-[#8b6914] transition-all duration-300 text-sm" data-key="form-submit">تأكيد الحجز</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- قسم الاتصال والمعلومات Contact & Footer -->
+    <footer id="contact" class="bg-[#1a1208] pt-16 pb-8 border-t border-[#2d1f0e] px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+            <div>
+                <h3 class="brand-font text-xl text-[#c8922a] mb-4">Brew & Bites</h3>
+                <p class="text-xs text-[#f5f0e8]/60 leading-relaxed" data-key="footer-about">وجهتك المثالية للحصول على فنجان قهوة محضر باحترافية وبيئة مريحة للعمل أو اللقاءات.</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-[#c8922a] uppercase tracking-wider mb-4" data-key="footer-hours-title">ساعات العمل</h3>
+                <p class="text-xs text-[#f5f0e8]/80 mb-2" data-key="footer-hours-1">طوال أيام الأسبوع: 7:00 صباحاً - 11:00 مساءً</p>
+                <p class="text-xs text-[#f5f0e8]/80" data-key="footer-hours-2">الجمعة والسبت: 8:00 صباحاً - 12:00 منتصف الليل</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-[#c8922a] uppercase tracking-wider mb-4" data-key="footer-contact-title">العنوان والاتصال</h3>
+                <p class="text-xs text-[#f5f0e8]/80 mb-2" data-key="footer-address">شارع الثقافة، وسط المدينة النابض</p>
+                <p class="text-xs text-[#f5f0e8]/80">hello@brewandbites.com | +966 50 000 0000</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-[#2d1f0e] pt-6 text-center text-xs text-[#f5f0e8]/40">
+            <p>&copy; 2026 Brew & Bites. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- الـ Drawer الجانبي لقائمة الطعام التفاعلية السلسة - تم تزويده بصور مصغرة تظهر وتتفاعل بشكل جميل عند التمرير -->
+    <div id="menuDrawer" class="fixed top-0 bottom-0 -right-full w-full sm:w-[450px] bg-[#1a1208] border-l border-[#c8922a]/20 shadow-2xl z-50 transition-all duration-500 overflow-y-auto p-6 md:p-8 flex flex-col">
+        
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-[#2d1f0e]">
+            <h3 class="brand-font text-2xl text-[#c8922a]" data-key="drawer-title">قائمة الاختيارات</h3>
+            <button onclick="toggleDrawer()" class="text-[#f5f0e8]/60 hover:text-[#c8922a] focus:outline-none text-sm font-bold flex items-center gap-1">
+                <span data-key="drawer-close">إغلاق</span> &times;
+            </button>
+        </div>
+
+        <div class="space-y-8 flex-1">
+            <!-- التصنيف الأول: القهوة المختصة -->
+            <div>
+                <h4 class="text-xs font-bold text-[#8b6914] uppercase tracking-widest mb-4 border-b border-[#2d1f0e] pb-1" data-key="cat-coffee">القهوة المختصة</h4>
+                <div class="space-y-4">
+                    <!-- صنف 1 -->
+                    <div class="group cursor-pointer flex gap-4 items-center p-2 rounded hover:bg-[#2d1f0e]/40 transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=150" alt="Cortado" class="w-14 h-14 object-cover rounded-md border border-[#c8922a]/20">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h5 class="text-sm font-bold group-hover:text-[#c8922a] transition-colors" data-key="item-1-title">إسبريسو كورتادو</h5>
+                                <span class="text-sm font-mono text-[#c8922a] font-bold">18 SAR</span>
+                            </div>
+                            <p class="text-xs text-[#f5f0e8]/50 mt-1 max-h-0 opacity-0 overflow-hidden group-hover:max-h-12 group-hover:opacity-100 transition-all duration-500 ease-in-out" data-key="item-1-desc">جرعة مزدوجة من الإسبريسو الغني مع حليب مبخر بسلاسة.</p>
+                        </div>
+                    </div>
+                    <!-- صنف 2 -->
+                    <div class="group cursor-pointer flex gap-4 items-center p-2 rounded hover:bg-[#2d1f0e]/40 transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=150" alt="V60" class="w-14 h-14 object-cover rounded-md border border-[#c8922a]/20">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h5 class="text-sm font-bold group-hover:text-[#c8922a] transition-colors" data-key="item-2-title">V60 بالتنقيط</h5>
+                                <span class="text-sm font-mono text-[#c8922a] font-bold">24 SAR</span>
+                            </div>
+                            <p class="text-xs text-[#f5f0e8]/50 mt-1 max-h-0 opacity-0 overflow-hidden group-hover:max-h-12 group-hover:opacity-100 transition-all duration-500 ease-in-out" data-key="item-2-desc">بن إثيوبي فاخر بعبق الفواكه والزهور المستخلصة بعناية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التصنيف الثاني: المخبوزات والأطباق الخفيفة -->
+            <div>
+                <h4 class="text-xs font-bold text-[#8b6914] uppercase tracking-widest mb-4 border-b border-[#2d1f0e] pb-1" data-key="cat-bites">المخبوزات والأطباق الخفيفة</h4>
+                <div class="space-y-4">
+                    <!-- صنف 3 -->
+                    <div class="group cursor-pointer flex gap-4 items-center p-2 rounded hover:bg-[#2d1f0e]/40 transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=150" alt="Croissant" class="w-14 h-14 object-cover rounded-md border border-[#c8922a]/20">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h5 class="text-sm font-bold group-hover:text-[#c8922a] transition-colors" data-key="item-3-title">كرواسون اللوز المقرمش</h5>
+                                <span class="text-sm font-mono text-[#c8922a] font-bold">16 SAR</span>
+                            </div>
+                            <p class="text-xs text-[#f5f0e8]/50 mt-1 max-h-0 opacity-0 overflow-hidden group-hover:max-h-12 group-hover:opacity-100 transition-all duration-500 ease-in-out" data-key="item-3-desc">مخبوز فرنسي طازج يومياً، محشو بكريمة اللوز الغنية ورقائق اللوز المحمصة.</p>
+                        </div>
+                    </div>
+                    <!-- صنف 4 -->
+                    <div class="group cursor-pointer flex gap-4 items-center p-2 rounded hover:bg-[#2d1f0e]/40 transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=150" alt="Chocolate Cake" class="w-14 h-14 object-cover rounded-md border border-[#c8922a]/20">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h5 class="text-sm font-bold group-hover:text-[#c8922a] transition-colors" data-key="item-4-title">تورتة شوكولاتة إسبريسو</h5>
+                                <span class="text-sm font-mono text-[#c8922a] font-bold">28 SAR</span>
+                            </div>
+                            <p class="text-xs text-[#f5f0e8]/50 mt-1 max-h-0 opacity-0 overflow-hidden group-hover:max-h-12 group-hover:opacity-100 transition-all duration-500 ease-in-out" data-key="item-4-desc">طبقات غنية من الشوكولاتة الداكنة المدمجة بنكهة الإسبريسو الخاصة بنا.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نظام التفاعل واللغات المطور لتغطية الاتجاهات المعاكسة -->
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.classList.add('opacity-0');
+            setTimeout(() => loader.remove(), 700);
+        });
+
+        const langData = {
+            ar: {
+                dir: "rtl",
+                langBtn: "EN",
+                font: "'Cairo', 'DM Sans', sans-serif",
+                "back-portfolio": "→ العودة للمعرض",
+                "demo-badge": "نموذج عرض",
+                "nav-home": "الرئيسية",
+                "nav-menu": "قائمة الطعام",
+                "nav-about": "عن كافيه",
+                "nav-reservations": "الحجوزات",
+                "nav-contact": "اتصل بنا",
+                "hero-sub": "مرحباً بكم في ملاذ القهوة",
+                "hero-title": "رائحة تجمعنا، ومذاق يأسرنا",
+                "hero-desc": "كل رشفة تحكي قصة حب، وكل طبق محضر بعناية من أجود المكونات الطازجة لتجربة لا تُنسى.",
+                "hero-btn-menu": "اكتشف القائمة",
+                "hero-btn-book": "احجز طاولتك الآن",
+                "about-badge": "قصتنا",
+                "about-title": "شغف بالتحميص والإتقان",
+                "about-p1": "بدأنا برؤية بسيطة: خلق مساحة مريحة تجمع بين عشاق القهوة الأصيلة والأطباق المبتكرة. في Brew & Bites، نحن لا نقدم الطعام والشراب فحسب، بل نصنع تجارب دافئة تلمس الحواس.",
+                "about-p2": "نختار حبوب البن بعناية من مزارع مستدامة حول العالم، ونحمصها محلياً لضمان وصول النكهة الغنية والنقية إلى كوبك في كل صباح.",
+                "reserve-title": "حجز طاولة",
+                "reserve-sub": "خطط لأمسيتك الرائعة معنا بسهولة وسرعة",
+                "form-name": "الاسم الكامل",
+                "form-phone": "رقم الهاتف",
+                "form-guests": "عدد الأفراد",
+                "form-date": "التاريخ والوقت",
+                "form-submit": "تأكيد الحجز",
+                "footer-about": "وجهتك المثالية للحصول على فنجان قهوة محضر باحترافية وبيئة مريحة للعمل أو اللقاءات.",
+                "footer-hours-title": "ساعات العمل",
+                "footer-hours-1": "طوال أيام الأسبوع: 7:00 صباحاً - 11:00 مساءً",
+                "footer-hours-2": "الجمعة والسبت: 8:00 صباحاً - 12:00 منتصف الليل",
+                "footer-contact-title": "العنوان والاتصال",
+                "footer-address": "شارع الثقافة، وسط المدينة النابض",
+                "drawer-title": "قائمة الاختيارات",
+                "drawer-close": "إغلاق",
+                "cat-coffee": "القهوة المختصة",
+                "cat-bites": "المخبوزات والأطباق الخفيفة",
+                "item-1-title": "إسبريسو كورتادو",
+                "item-1-desc": "جرعة مزدوجة من الإسبريسو الغني مع حليب مبخر بسلاسة.",
+                "item-2-title": "V60 بالتنقيط",
+                "item-2-desc": "بن إثيوبي فاخر بعبق الفواكه والزهور المستخلصة بعناية.",
+                "item-3-title": "كرواسون اللوز المقرمش",
+                "item-3-desc": "مخبوز فرنسي طازج يومياً، محشو بكريمة اللوز الغنية ورقائق اللوز المحمصة.",
+                "item-4-title": "تورتة شوكولاتة إسبريسو",
+                "item-4-desc": "طبقات غنية من الشوكولاتة الداكنة المدمجة بنكهة الإسبريسو الخاصة بنا."
+            },
+            en: {
+                dir: "ltr",
+                langBtn: "AR",
+                font: "'DM Sans', sans-serif",
+                "back-portfolio": "← Back to Portfolio",
+                "demo-badge": "Portfolio Demo",
+                "nav-home": "Home",
+                "nav-menu": "Menu",
+                "nav-about": "About Us",
+                "nav-reservations": "Reservations",
+                "nav-contact": "Contact",
+                "hero-sub": "WELCOME TO COFFEE HAVEN",
+                "hero-title": "Aroma Conveys, Taste Stays",
+                "hero-desc": "Every sip tells a story of love, and every dish is crafted with precision from the finest fresh ingredients for an unforgettable experience.",
+                "hero-btn-menu": "Explore Menu",
+                "hero-btn-book": "Book a Table Now",
+                "about-badge": "OUR STORY",
+                "about-title": "Passion for Roasting & Crafting",
+                "about-p1": "We started with a simple vision: creating a cozy space that brings together lovers of authentic coffee and innovative dishes. At Brew & Bites, we don't just serve food and drinks; we craft warm memories.",
+                "about-p2": "We source our beans globally from sustainable farms and roast them locally to ensure a rich, pure flavor reaches your cup every single morning.",
+                "reserve-title": "Book A Table",
+                "reserve-sub": "Plan your beautiful evening with us easily and quickly",
+                "form-name": "Full Name",
+                "form-phone": "Phone Number",
+                "form-guests": "Number of Guests",
+                "form-date": "Date & Time",
+                "form-submit": "Confirm Reservation",
+                "footer-about": "Your perfect destination for a professionally brewed cup of coffee and a comfortable environment for work or gatherings.",
+                "footer-hours-title": "Opening Hours",
+                "footer-hours-1": "Weekdays: 7:00 AM - 11:00 PM",
+                "footer-hours-2": "Fri & Sat: 8:00 AM - 12:00 Midnight",
+                "footer-contact-title": "Address & Contact",
+                "footer-address": "Culture Street, Vibrant Downtown",
+                "drawer-title": "Our Selection",
+                "drawer-close": "Close",
+                "cat-coffee": "Specialty Coffee",
+                "cat-bites": "Bites & Pastries",
+                "item-1-title": "Espresso Cortado",
+                "item-1-desc": "A rich double shot of espresso balanced with flawlessly steamed milk.",
+                "item-2-title": "V60 Drip Coffee",
+                "item-2-desc": "Premium Ethiopian single-origin coffee with rich floral notes.",
+                "item-3-title": "Crispy Almond Croissant",
+                "item-3-desc": "Freshly baked daily, filled with almond cream and topped with toasted almond flakes.",
+                "item-4-title": "Espresso Chocolate Torte",
+                "item-4-desc": "Rich dark chocolate cake layers infused with our signature espresso."
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const data = langData[currentLang];
+            
+            document.documentElement.setAttribute('dir', data.dir);
+            document.documentElement.setAttribute('lang', currentLang);
+            document.body.style.fontFamily = data.font;
+            
+            document.getElementById('langBtn').innerText = data.langBtn;
+
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (data[key]) {
+                    element.innerText = data[key];
+                }
+            });
+
+            const drawer = document.getElementById('menuDrawer');
+            // إعادة ضبط الـ Classes للـ Drawer بما يناسب الاتجاه اللغوي الجديد لمنع التعليق خارج الشاشة
+            if (currentLang === 'en') {
+                drawer.classList.remove('-right-full', 'right-0');
+                drawer.classList.add('-left-full');
+            } else {
+                drawer.classList.remove('-left-full', 'left-0');
+                drawer.classList.add('-right-full');
+            }
+        }
+
+        function toggleDrawer() {
+            const drawer = document.getElementById('menuDrawer');
+            if (currentLang === 'ar') {
+                drawer.classList.toggle('-right-full');
+                drawer.classList.toggle('right-0');
+            } else {
+                drawer.classList.toggle('-left-full');
+                drawer.classList.toggle('left-0');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-[#1a1208]', 'shadow-lg');
+                header.classList.remove('bg-[#1a1208]/90');
+            } else {
+                header.classList.add('bg-[#1a1208]/90');
+                header.classList.remove('bg-[#1a1208]', 'shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

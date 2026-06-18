@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopNest — Veloce Lab</title>
+<meta name="description" content="نموذج متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء">
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../veloce-lab-portfolio.html" class="logo-link">
+      <img src="../logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">VeloceLab</span>
+    </a>
+    <div class="nav-actions">
+      <a href="../veloce-lab-portfolio.html#portfolio" class="back-nav" data-i18n="back">→ العودة للمعرض</a>
+      <div class="lang-toggle">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="demo-pill" data-i18n="demo">نموذج عرض</span>
+  <h1 class="page-title">ShopNest</h1>
+  <p class="page-desc" data-i18n="desc">متجر إلكتروني عصري بتصميم جريء وسلة تسوق تفاعلية.</p>
+
+  <div class="hero-shot">
+    <img src="../assets/store.png" alt="ShopNest preview" loading="lazy">
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3 data-i18n="challengeTitle">التحدي</h3>
+      <p data-i18n="challenge">علامة تجارية أزياء تحتاج متجراً يبرز الهوية البصرية الجريئة ويحفّز الشراء.</p>
+    </div>
+    <div class="detail-card">
+      <h3 data-i18n="solutionTitle">الحل</h3>
+      <p data-i18n="solution">تصميم داكن بألوان حمراء نابضة، مع عرض منتجات، سلة تسوق، ونشرة بريدية تفاعلية.</p>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3 data-i18n="featuresTitle">الميزات</h3>
+    <ul class="feature-list">
+      <li data-i18n="f1">عرض منتجات مع شارات SALE/NEW</li>
+      <li data-i18n="f2">سلة تسوق تفاعلية</li>
+      <li data-i18n="f3">شريط عروض متحرك (Marquee)</li>
+      <li data-i18n="f4">تصميم متجاوب</li>
+    </ul>
+  </div>
+
+  <div class="tech-row">
+    <span class="tech-tag">HTML</span>
+    <span class="tech-tag">CSS</span>
+    <span class="tech-tag">JavaScript</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="../store/index.html" class="btn-primary" data-i18n="liveDemo">عرض النموذج الحي</a>
+    <a href="../veloce-lab-portfolio.html#contact" class="btn-ghost" data-i18n="contact">اطلب مشروعاً مشابهاً</a>
+  </div>
+</main>
+
+<footer><span data-i18n="footer">© 2025 Veloce Lab — نموذج عرض ضمن المعرض</span></footer>
+
+<script src="project.js"></script>
+<script>
+initProjectPage({
+  ar: {
+    pageTitle: "ShopNest — Veloce Lab",
+    back: "→ العودة للمعرض", demo: "نموذج عرض",
+    desc: "متجر إلكتروني عصري بتصميم جريء وسلة تسوق تفاعلية.",
+    challengeTitle: "التحدي", challenge: "علامة تجارية أزياء تحتاج متجراً يبرز الهوية البصرية الجريئة ويحفّز الشراء.",
+    solutionTitle: "الحل", solution: "تصميم داكن بألوان حمراء نابضة، مع عرض منتجات، سلة تسوق، ونشرة بريدية تفاعلية.",
+    featuresTitle: "الميزات", f1: "عرض منتجات مع شارات SALE/NEW", f2: "سلة تسوق تفاعلية", f3: "شريط عروض متحرك (Marquee)", f4: "تصميم متجاوب",
+    liveDemo: "عرض النموذج الحي", contact: "اطلب مشروعاً مشابهاً", footer: "© 2025 Veloce Lab — نموذج عرض ضمن المعرض"
+  },
+  en: {
+    pageTitle: "ShopNest — Veloce Lab",
+    back: "← Back to Portfolio", demo: "Portfolio Demo",
+    desc: "A modern e-commerce store with bold styling and an interactive shopping cart.",
+    challengeTitle: "Challenge", challenge: "A fashion brand needed a store that highlights bold visual identity and drives purchases.",
+    solutionTitle: "Solution", solution: "Dark design with vibrant red accents, product showcase, shopping cart, and interactive newsletter.",
+    featuresTitle: "Features", f1: "Products with SALE/NEW badges", f2: "Interactive shopping cart", f3: "Animated promo marquee", f4: "Responsive design",
+    liveDemo: "View Live Demo", contact: "Request a similar project", footer: "© 2025 Veloce Lab — Portfolio demo"
+  }
+});
+</script>
+</body>
+</html>
