@@ -126,6 +126,12 @@ html[dir="ltr"] .demo-link .fa-arrow-left{transform:scaleX(-1)}
 .project-card:hover .preview-img{transform:scale(1.06)}
 .preview-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.55),transparent 45%)}
 .demo-badge-card{position:absolute;bottom:10px;inset-inline-start:10px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 9px;border-radius:999px;background:rgba(10,10,15,.75);border:0.5px solid rgba(108,99,255,.35);color:var(--accent2);backdrop-filter:blur(6px)}
+.demo-badge-card.live{border-color:rgba(34,211,160,.45);color:var(--green)}
+.portfolio-category{margin-bottom:3rem}
+.portfolio-category:last-child{margin-bottom:0}
+.portfolio-cat-title{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:0.35rem;display:flex;align-items:center;gap:0.5rem}
+.portfolio-cat-title i{font-size:0.9rem;color:var(--accent2)}
+.portfolio-cat-sub{font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem}
 .project-info{padding:1.25rem}
 .project-info h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-bottom:0.4rem}
 .project-info p{font-size:0.85rem;color:var(--muted);margin-bottom:1rem}
@@ -216,7 +222,7 @@ footer i{color:var(--accent2);margin-inline-start:0.25rem}
     <a href="#contact" class="btn-ghost" data-i18n="hero.cta2">تواصل معنا</a>
   </div>
   <div class="stats">
-    <div class="stat"><div class="stat-num">5<span>+</span></div><div class="stat-label" data-i18n="stats.systems">نماذج جاهزة</div></div>
+    <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label" data-i18n="stats.systems">نماذج جاهزة</div></div>
     <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label" data-i18n="stats.experience">سنوات خبرة</div></div>
     <div class="stat"><div class="stat-num">100<span>%</span></div><div class="stat-label" data-i18n="stats.delivered">مشاريع مُسلَّمة</div></div>
   </div>
@@ -264,98 +270,128 @@ footer i{color:var(--accent2);margin-inline-start:0.25rem}
     <h2 class="section-title" data-i18n="portfolio.title">نماذج تفاعلية</h2>
     <p class="section-sub" data-i18n="portfolio.sub">نماذج جاهزة للاستعراض — اضغط على أي مشروع لرؤية التفاصيل ثم جرّب النموذج الحي</p>
   </div>
-  <div class="portfolio-grid reveal">
+  <div class="portfolio-category reveal">
+    <h3 class="portfolio-cat-title"><i class="fa-solid fa-store"></i> <span data-i18n="portfolio.simple.title">مشاريع فردية وبسيطة</span></h3>
+    <p class="portfolio-cat-sub" data-i18n="portfolio.simple.sub">صفحات هبوط، مواقع صغيرة، ومتاجر إلكترونية للأعمال الفردية</p>
+    <div class="portfolio-grid">
 
-    <a href="projects/clinic.html" class="project-card">
-      <div class="project-preview">
-        <img src="assets/clinic.png" alt="MediCare Clinic" class="preview-img" loading="lazy">
-        <div class="preview-overlay"></div>
-        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
-      </div>
-      <div class="project-info">
-        <h3 data-i18n="projects.p1.title">MediCare Clinic</h3>
-        <p data-i18n="projects.p1.desc">موقع عيادة طبية متكامل — حجز مواعيد، عرض الأطباء، والخدمات الطبية</p>
-        <div class="tech-tags">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">Tailwind</span>
-          <span class="tech-tag">JavaScript</span>
+      <a href="projects/brew-bites.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/Brew%20%26%20Bites.png" alt="Brew &amp; Bites" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
         </div>
-        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
-      </div>
-    </a>
-
-    <a href="projects/travil.html" class="project-card">
-      <div class="project-preview">
-        <img src="assets/travel.png" alt="Wander Syria" class="preview-img" loading="lazy">
-        <div class="preview-overlay"></div>
-        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
-      </div>
-      <div class="project-info">
-        <h3 data-i18n="projects.p2.title">Wander Syria</h3>
-        <p data-i18n="projects.p2.desc">منصة سياحة وحجز رحلات — وجهات، جولات، وحجز تفاعلي</p>
-        <div class="tech-tags">
-          <span class="tech-tag">SPA</span>
-          <span class="tech-tag">Tailwind</span>
-          <span class="tech-tag">i18n</span>
+        <div class="project-info">
+          <h3 data-i18n="projects.p4.title">Brew &amp; Bites</h3>
+          <p data-i18n="projects.p4.desc">موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">Drawer UI</span>
+            <span class="tech-tag">i18n</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
         </div>
-        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
-      </div>
-    </a>
+      </a>
 
-    <a href="projects/educational.html" class="project-card">
-      <div class="project-preview">
-        <img src="assets/educational.png" alt="LearnFlow" class="preview-img" loading="lazy">
-        <div class="preview-overlay"></div>
-        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
-      </div>
-      <div class="project-info">
-        <h3 data-i18n="projects.p3.title">LearnFlow</h3>
-        <p data-i18n="projects.p3.desc">منصة تعليم إلكتروني — كورسات، مسارات تعلم، وآراء الطلاب</p>
-        <div class="tech-tags">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">Tailwind</span>
-          <span class="tech-tag">Animations</span>
+      <a href="projects/shopnest.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/store.png" alt="ShopNest" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
         </div>
-        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
-      </div>
-    </a>
-
-    <a href="projects/brew-bites.html" class="project-card">
-      <div class="project-preview">
-        <img src="assets/Brew%20%26%20Bites.png" alt="Brew &amp; Bites" class="preview-img" loading="lazy">
-        <div class="preview-overlay"></div>
-        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
-      </div>
-      <div class="project-info">
-        <h3 data-i18n="projects.p4.title">Brew &amp; Bites</h3>
-        <p data-i18n="projects.p4.desc">موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة</p>
-        <div class="tech-tags">
-          <span class="tech-tag">Tailwind</span>
-          <span class="tech-tag">Drawer UI</span>
-          <span class="tech-tag">i18n</span>
+        <div class="project-info">
+          <h3 data-i18n="projects.p5.title">ShopNest</h3>
+          <p data-i18n="projects.p5.desc">متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
         </div>
-        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
-      </div>
-    </a>
+      </a>
 
-    <a href="projects/shopnest.html" class="project-card">
-      <div class="project-preview">
-        <img src="assets/store.png" alt="ShopNest" class="preview-img" loading="lazy">
-        <div class="preview-overlay"></div>
-        <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
-      </div>
-      <div class="project-info">
-        <h3 data-i18n="projects.p5.title">ShopNest</h3>
-        <p data-i18n="projects.p5.desc">متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء</p>
-        <div class="tech-tags">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
+      <a href="projects/travil.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/travel.png" alt="Wander Syria" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
         </div>
-        <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
-      </div>
-    </a>
+        <div class="project-info">
+          <h3 data-i18n="projects.p2.title">Wander Syria</h3>
+          <p data-i18n="projects.p2.desc">منصة سياحة وحجز رحلات — وجهات، جولات، وحجز تفاعلي</p>
+          <div class="tech-tags">
+            <span class="tech-tag">SPA</span>
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">i18n</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+        </div>
+      </a>
 
+    </div>
+  </div>
+
+  <div class="portfolio-category reveal">
+    <h3 class="portfolio-cat-title"><i class="fa-solid fa-building"></i> <span data-i18n="portfolio.enterprise.title">مشاريع الشركات</span></h3>
+    <p class="portfolio-cat-sub" data-i18n="portfolio.enterprise.sub">أنظمة ومنصات متكاملة لشركات وخدمات احترافية</p>
+    <div class="portfolio-grid">
+
+      <a href="projects/safar.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/safar.png" alt="SAFAR" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card live" data-i18n="projects.badge.live">مشروع حي</span>
+        </div>
+        <div class="project-info">
+          <h3 data-i18n="projects.p6.title">سفر | SAFAR</h3>
+          <p data-i18n="projects.p6.desc">منصة حجز تذاكر النقل البري — بحث، حجز، وإدارة رحلات بين المدن</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Laravel</span>
+            <span class="tech-tag">Booking</span>
+            <span class="tech-tag">Live</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+        </div>
+      </a>
+
+      <a href="projects/clinic.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/clinic.png" alt="MediCare Clinic" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+        </div>
+        <div class="project-info">
+          <h3 data-i18n="projects.p1.title">MediCare Clinic</h3>
+          <p data-i18n="projects.p1.desc">موقع عيادة طبية متكامل — حجز مواعيد، عرض الأطباء، والخدمات الطبية</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+        </div>
+      </a>
+
+      <a href="projects/educational.html" class="project-card">
+        <div class="project-preview">
+          <img src="assets/educational.png" alt="LearnFlow" class="preview-img" loading="lazy">
+          <div class="preview-overlay"></div>
+          <span class="demo-badge-card" data-i18n="projects.badge">نموذج عرض</span>
+        </div>
+        <div class="project-info">
+          <h3 data-i18n="projects.p3.title">LearnFlow</h3>
+          <p data-i18n="projects.p3.desc">منصة تعليم إلكتروني — كورسات، مسارات تعلم، وآراء الطلاب</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">Animations</span>
+          </div>
+          <span class="demo-link"><span data-i18n="projects.demo">عرض التفاصيل</span> <i class="fa-solid fa-arrow-left"></i></span>
+        </div>
+      </a>
+
+    </div>
   </div>
 </section>
 
@@ -375,6 +411,7 @@ footer i{color:var(--accent2);margin-inline-start:0.25rem}
         <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f2">نموذج تواصل</span></li>
         <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f3">متجاوب مع الجوال</span></li>
         <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f4">سريع التحميل</span></li>
+        <li><i class="fa-solid fa-check check"></i> <span data-i18n="pricing.p1.f5">تسليم خلال 48 ساعة</span></li>
       </ul>
       <a href="#contact" class="btn-ghost" style="display:block;text-align:center" data-i18n="pricing.order">اطلب الآن</a>
     </div>
@@ -411,7 +448,7 @@ footer i{color:var(--accent2);margin-inline-start:0.25rem}
     <h2 class="section-title" style="text-align:center" data-i18n="contact.title">لنبنِ مشروعاً معاً</h2>
     <p style="color:var(--muted);text-align:center;max-width:400px;margin:0 auto" data-i18n="contact.sub">هل لديك مشروع؟ سؤال؟ تريد معرفة ما يمكننا تقديمه؟ تواصل معنا</p>
     <div class="contact-links">
-      <a href="https://wa.me/963xxxxxxxxx" class="contact-link"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact.whatsapp">واتساب</span></a>
+      <a href="https://wa.me/96171208122" class="contact-link"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact.whatsapp">واتساب</span></a>
       <a href="mailto:hello@velocelab.com" class="contact-link"><i class="fa-solid fa-envelope"></i> <span data-i18n="contact.email">البريد الإلكتروني</span></a>
       <a href="#" class="contact-link"><i class="fa-brands fa-facebook"></i> <span data-i18n="contact.facebook">فيسبوك</span></a>
     </div>
@@ -457,7 +494,12 @@ const i18n = {
     'portfolio.tag': 'أعمالنا',
     'portfolio.title': 'نماذج تفاعلية',
     'portfolio.sub': 'نماذج جاهزة للاستعراض — اضغط على أي مشروع لرؤية التفاصيل ثم جرّب النموذج الحي',
+    'portfolio.simple.title': 'مشاريع فردية وبسيطة',
+    'portfolio.simple.sub': 'صفحات هبوط، مواقع صغيرة، ومتاجر إلكترونية للأعمال الفردية',
+    'portfolio.enterprise.title': 'مشاريع الشركات',
+    'portfolio.enterprise.sub': 'أنظمة ومنصات متكاملة لشركات وخدمات احترافية',
     'projects.badge': 'نموذج عرض',
+    'projects.badge.live': 'مشروع حي',
     'projects.demo': 'عرض التفاصيل',
     'projects.p1.title': 'MediCare Clinic',
     'projects.p1.desc': 'موقع عيادة طبية متكامل — حجز مواعيد، عرض الأطباء، والخدمات الطبية',
@@ -469,6 +511,8 @@ const i18n = {
     'projects.p4.desc': 'موقع مطعم وكافيه — قائمة طعام، حجوزات، وتجربة بصرية دافئة',
     'projects.p5.title': 'ShopNest',
     'projects.p5.desc': 'متجر إلكتروني عصري — منتجات، سلة تسوق، وتصميم جريء',
+    'projects.p6.title': 'سفر | SAFAR',
+    'projects.p6.desc': 'منصة حجز تذاكر النقل البري — بحث، حجز، وإدارة رحلات بين المدن',
     'pricing.tag': 'الأسعار',
     'pricing.title': 'واضح ومباشر',
     'pricing.sub': 'لا مفاجآت — تعرف ما ستدفعه منذ البداية',
@@ -477,6 +521,7 @@ const i18n = {
     'pricing.p1.f2': 'نموذج تواصل',
     'pricing.p1.f3': 'متجاوب مع الجوال',
     'pricing.p1.f4': 'سريع التحميل',
+    'pricing.p1.f5': 'تسليم خلال 48 ساعة',
     'pricing.popular': 'الأكثر طلباً',
     'pricing.p2.name': 'موقع شركة / خدمات',
     'pricing.p2.f1': 'عدة صفحات',
@@ -532,7 +577,12 @@ const i18n = {
     'portfolio.tag': 'Our work',
     'portfolio.title': 'Interactive Demos',
     'portfolio.sub': 'Ready-to-explore demos — click any project for details, then try the live version',
+    'portfolio.simple.title': 'Simple & Individual Projects',
+    'portfolio.simple.sub': 'Landing pages, small business sites, and compact e-commerce stores',
+    'portfolio.enterprise.title': 'Company Projects',
+    'portfolio.enterprise.sub': 'Integrated systems and platforms for professional businesses',
     'projects.badge': 'Portfolio Demo',
+    'projects.badge.live': 'Live Project',
     'projects.demo': 'View Details',
     'projects.p1.title': 'MediCare Clinic',
     'projects.p1.desc': 'Full medical clinic website — appointments, doctors, and healthcare services',
@@ -544,6 +594,8 @@ const i18n = {
     'projects.p4.desc': 'Restaurant and café website — menu, reservations, and warm visual experience',
     'projects.p5.title': 'ShopNest',
     'projects.p5.desc': 'Modern e-commerce store — products, shopping cart, and bold design',
+    'projects.p6.title': 'SAFAR | Bus Travel',
+    'projects.p6.desc': 'Intercity bus ticket booking platform — search, book, and manage trips between cities',
     'pricing.tag': 'Pricing',
     'pricing.title': 'Clear and straightforward',
     'pricing.sub': 'No surprises — you know what you pay from the start',
@@ -552,6 +604,7 @@ const i18n = {
     'pricing.p1.f2': 'Contact form',
     'pricing.p1.f3': 'Mobile responsive',
     'pricing.p1.f4': 'Fast loading',
+    'pricing.p1.f5': 'Delivery within 48 hours',
     'pricing.popular': 'Most popular',
     'pricing.p2.name': 'Company / services website',
     'pricing.p2.f1': 'Multiple pages',

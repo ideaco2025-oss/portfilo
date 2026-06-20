@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سفر | SAFAR — Veloce Lab</title>
+<meta name="description" content="منصة سفر لحجز تذاكر النقل البري بين المدن — مشروع حي على safar-sy.com">
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project.css">
+<style>
+.live-pill{color:var(--green);background:rgba(34,211,160,0.1);border-color:rgba(34,211,160,0.35)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo-link">
+      <img src="../logo.png" alt="Veloce Lab" class="logo-img">
+      <span class="logo-text">VeloceLab</span>
+    </a>
+    <div class="nav-actions">
+      <a href="../index.html#portfolio" class="back-nav" data-i18n="back">→ العودة للمعرض</a>
+      <div class="lang-toggle">
+        <button class="lang-opt active" data-lang="ar" type="button">ع</button>
+        <button class="lang-opt" data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="demo-pill live-pill" data-i18n="demo">مشروع حي</span>
+  <h1 class="page-title">سفر | SAFAR</h1>
+  <p class="page-desc" data-i18n="desc">منصة متكاملة لحجز تذاكر النقل البري بين المدن — مشروع حقيقي يعمل على safar-sy.com</p>
+  <p class="page-desc-recommended" style="color: white !important;" data-i18n="recommended">النموذج مصمم للشاشات الصغيرة والمتوسطة، للحصول على أفضل تجربة، يرجى زيارة الموقع على الموبايل او التابلت</p>
+
+  <div class="hero-shot">
+    <img src="../assets/safar.png" alt="SAFAR platform preview" loading="lazy">
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3 data-i18n="challengeTitle">التحدي</h3>
+      <p data-i18n="challenge">شركة نقل بري تحتاج منصة رقمية تمكّن المسافرين من البحث عن الرحلات وحجز التذاكر وإدارة حجوزاتهم بسهولة.</p>
+    </div>
+    <div class="detail-card">
+      <h3 data-i18n="solutionTitle">الحل</h3>
+      <p data-i18n="solution">منصة حجز متكاملة مع بحث عن الرحلات حسب المدن والتواريخ، نظام حجز ودفع، ولوحة إدارة للشركة.</p>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3 data-i18n="featuresTitle">الميزات</h3>
+    <ul class="feature-list">
+      <li data-i18n="f1">بحث وحجز تذاكر النقل البري</li>
+      <li data-i18n="f2">اختيار المدن والتواريخ والمقاعد</li>
+      <li data-i18n="f3">إدارة الحجوزات للمسافرين</li>
+      <li data-i18n="f4">لوحة تحكم لشركة النقل</li>
+    </ul>
+  </div>
+
+  <div class="tech-row">
+    <span class="tech-tag">React.js</span>
+    <span class="tech-tag">MVC Architecture</span>
+    <span class="tech-tag">MySQL</span>
+    <span class="tech-tag">Booking System</span>
+    <span class="tech-tag">Live</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://safar-sy.com" class="btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="liveDemo">زيارة الموقع الحي</a>
+    <a href="../index.html#contact" class="btn-ghost" data-i18n="contact">اطلب مشروعاً مشابهاً</a>
+  </div>
+</main>
+
+<footer><span data-i18n="footer">© 2025 Veloce Lab — مشروع حي ضمن المعرض</span></footer>
+
+<script src="project.js"></script>
+<script>
+initProjectPage({
+  ar: {
+    pageTitle: "سفر | SAFAR — Veloce Lab",
+    back: "→ العودة للمعرض",
+    demo: "مشروع حي",
+    desc: "منصة متكاملة لحجز تذاكر النقل البري بين المدن — مشروع حقيقي يعمل على safar-sy.com",
+    challengeTitle: "التحدي",
+    challenge: "شركة نقل بري تحتاج منصة رقمية تمكّن المسافرين من البحث عن الرحلات وحجز التذاكر وإدارة حجوزاتهم بسهولة.",
+    solutionTitle: "الحل",
+    solution: "منصة حجز متكاملة مع بحث عن الرحلات حسب المدن والتواريخ، نظام حجز ودفع، ولوحة إدارة للشركة.",
+    featuresTitle: "الميزات",
+    f1: "بحث وحجز تذاكر النقل البري",
+    f2: "اختيار المدن والتواريخ والمقاعد",
+    f3: "إدارة الحجوزات للمسافرين",
+    f4: "لوحة تحكم لشركة النقل",
+    liveDemo: "زيارة الموقع الحي",
+    recommended: "النموذج مصمم للشاشات الصغيرة والمتوسطة، للحصول على أفضل تجربة، يرجى زيارة الموقع على الموبايل او التابلت",
+    contact: "اطلب مشروعاً مشابهاً",
+    footer: "© 2025 Veloce Lab — مشروع حي ضمن المعرض"
+  },
+  en: {
+    pageTitle: "SAFAR — Veloce Lab",
+    back: "← Back to Portfolio",
+    demo: "Live Project",
+    desc: "A full intercity bus ticket booking platform — a real project live at safar-sy.com",
+    challengeTitle: "Challenge",
+    challenge: "A bus company needed a digital platform for travelers to search trips, book tickets, and manage reservations easily.",
+    solutionTitle: "Solution",
+    solution: "An integrated booking platform with trip search by cities and dates, reservation and payment flow, and a company admin panel.",
+    featuresTitle: "Features",
+    f1: "Search and book bus tickets",
+    f2: "City, date, and seat selection",
+    f3: "Traveler reservation management",
+    f4: "Transport company dashboard",
+    liveDemo: "Visit Live Site",
+    recommended: "The demo is designed for small and medium screens, to get the best experience, please visit the site on your phone or tablet",
+    contact: "Request a similar project",
+    footer: "© 2025 Veloce Lab — Live project in portfolio"
+  }
+});
+</script>
+</body>
+</html>
