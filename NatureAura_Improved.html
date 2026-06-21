@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NatureAura | مستحضرات العناية الطبيعية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // تدرجات الألوان العضوية المستوحاة من الطبيعة
+                        brand: { light: '#10b981', dark: '#059669', focus: '#047857' },
+                        surface: { light: '#f8fafc', dark: '#18181b' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .page-transition { transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .page-hidden { opacity: 0; transform: translateY(15px); pointer-events: none; position: absolute; width: 100%; }
+        .page-visible { opacity: 1; transform: translateY(0); position: relative; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-300 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-white/85 dark:bg-zinc-900/85 backdrop-blur-md border-b border-stone-200 dark:border-zinc-800 sticky top-0 z-50 transition-colors">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            
+            <div class="flex items-center gap-8">
+                <a href="#" onclick="navigateTo('home')" class="text-2xl font-black text-brand-dark dark:text-brand-light flex items-center gap-2 tracking-tight">
+                    <i class="fa-solid fa-leaf"></i> <span data-i18n="brand">NatureAura</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600 dark:text-zinc-400">
+                    <a href="#" onclick="navigateTo('home')" data-i18n="navHome" class="hover:text-brand-dark transition-colors">الرئيسية</a>
+                    <a href="#" onclick="showCategory('all')" data-i18n="navBrowse" class="hover:text-brand-dark transition-colors">تصفح المنتجات</a>
+                </nav>
+            </div>
+
+            <div class="hidden sm:flex flex-1 max-w-md mx-8 relative text-stone-400 focus-within:text-brand-dark dark:focus-within:text-brand-light transition-colors">
+                <i class="fa-solid fa-magnifying-glass absolute top-1/2 -translate-y-1/2 rtl:right-4 ltr:left-4"></i>
+                <input type="text" id="globalSearch" oninput="debounceSearch()" data-i18n="searchPlaceholder" placeholder="ابحث عن زيوت، ماسكات، أو مستحضرات..." class="w-full bg-stone-100 dark:bg-zinc-800 border-none rounded-full py-2 rtl:pr-10 rtl:pl-5 ltr:pl-10 ltr:pr-5 text-sm focus:ring-2 focus:ring-brand-light transition-all outline-none dark:text-white">
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full hover:bg-stone-200 dark:hover:bg-zinc-800 transition-colors flex items-center justify-center text-stone-600 dark:text-zinc-300">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+
+                <button onclick="toggleLang()" id="langBtn" class="text-xs font-bold border border-stone-300 dark:border-zinc-700 px-2.5 py-1.5 rounded-md hover:bg-stone-200 dark:hover:bg-zinc-800 transition-colors">EN</button>
+
+                <div onclick="navigateTo('checkout')" class="relative cursor-pointer w-9 h-9 flex items-center justify-center rounded-full hover:bg-stone-200 dark:hover:bg-zinc-800 transition-all text-stone-600 dark:text-zinc-300 group">
+                    <i class="fa-solid fa-cart-shopping group-hover:scale-110 transition-transform"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-sm">0</span>
+                </div>
+
+                <button onclick="navigateTo('admin')" class="bg-brand-dark hover:bg-brand-focus text-white text-sm font-medium px-4 py-2 rounded-full shadow-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high"></i> <span data-i18n="adminBtn">الإدارة</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 relative container mx-auto px-4 py-6">
+        <a href="ضع_رابط_معرضك_هنا.html" class="fixed bottom-6 rtl:left-6 ltr:right-6 bg-stone-800 dark:bg-stone-100 text-white dark:text-stone-900 px-5 py-3 rounded-full shadow-xl hover:-translate-y-1 transition-all duration-300 z-[100] flex items-center gap-2 font-bold text-sm group border border-stone-700 dark:border-stone-200">
+            <i class="fa-solid fa-briefcase group-hover:scale-110 transition-transform"></i>
+            <span data-i18n="backToPortfolio">العودة للمعرض</span>
+        </a>
+
+        <section id="view-home" class="page-transition page-visible">
+            <div class="bg-stone-900 text-white rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-xl">
+                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" alt="Background">
+                <div class="max-w-xl relative z-10">
+                    <span data-i18n="heroTag" class="bg-brand-light/20 text-brand-light text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm border border-brand-light/30">عناية طبيعية نقية</span>
+                    <h1 data-i18n="heroTitle" class="text-3xl md:text-5xl font-black mt-4 mb-4 leading-tight">جمالك من الطبيعة، نقي ومستدام</h1>
+                    <p data-i18n="heroDesc" class="text-stone-300 text-sm md:text-base mb-6 leading-relaxed">استكشفي تشكيلتنا الفاخرة من الزيوت الطبيعية، ماسكات بذور الكتان، ومستحضرات التجميل العضوية الخالية من المواد الكيميائية.</p>
+                    <button onclick="showCategory('all')" data-i18n="heroBtn" class="bg-brand-light text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-focus transition-colors shadow-lg">ابدئي الاستكشاف الآن</button>
+                </div>
+            </div>
+
+            <div class="mb-8 overflow-x-auto no-scrollbar flex items-center gap-3 pb-2" id="categoryFilter">
+                </div>
+
+            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+        </section>
+
+        <section id="view-product-detail" class="page-transition page-hidden">
+            <button onclick="navigateTo('home')" class="mb-6 flex items-center gap-2 text-sm font-semibold text-stone-500 hover:text-brand-dark dark:text-zinc-400 transition-colors group">
+                <i id="backIcon" class="fa-solid fa-arrow-right group-hover:-translate-x-1 transition-transform rtl:group-hover:translate-x-1"></i> 
+                <span data-i18n="backToStore">العودة للمتجر</span>
+            </button>
+            <div id="productDetailContent" class="bg-white dark:bg-zinc-900 rounded-3xl p-6 md:p-8 border border-stone-200/60 dark:border-zinc-800 grid md:grid-cols-2 gap-8 shadow-sm">
+            </div>
+        </section>
+
+        <section id="view-checkout" class="page-transition page-hidden">
+            <h2 data-i18n="checkoutTitle" class="text-2xl font-black mb-6">مراجعة طلبك وإتمام الدفع</h2>
+            <div class="grid lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-stone-200/60 dark:border-zinc-800 shadow-sm">
+                        <h3 class="font-bold text-lg mb-4 flex items-center justify-between border-b border-stone-100 dark:border-zinc-800 pb-3">
+                            <span data-i18n="selectedProducts">المنتجات المختارة</span>
+                            <span id="checkoutCartCount" class="text-sm font-normal text-brand-dark">0</span>
+                        </h3>
+                        <div id="cartItemsContainer" class="divide-y divide-stone-100 dark:divide-zinc-800"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-stone-200/60 dark:border-zinc-800 shadow-sm space-y-6">
+                    <h3 data-i18n="orderSummary" class="font-bold text-lg border-b border-stone-100 pb-3 dark:border-zinc-800">ملخص الفاتورة</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between text-stone-500 dark:text-zinc-400"><span data-i18n="subtotal">المجموع الفرعي</span><span id="subtotalPrice">$0.00</span></div>
+                        <div class="flex justify-between text-stone-500 dark:text-zinc-400"><span data-i18n="shipping">الشحن</span><span data-i18n="free" class="text-brand-light font-medium">مجاني</span></div>
+                        <hr class="dark:border-zinc-800">
+                        <div class="flex justify-between text-base font-bold"><span><span data-i18n="total">الإجمالي</span></span><span id="totalPrice" class="text-brand-dark">$0.00</span></div>
+                    </div>
+
+                    <div class="space-y-4 pt-2">
+                        <label data-i18n="cardDetails" class="block text-xs font-bold uppercase text-stone-400 tracking-wider">تفاصيل البطاقة</label>
+                        <div class="space-y-3 text-stone-600">
+                            <div class="relative">
+                                <i class="fa-regular fa-credit-card absolute top-1/2 -translate-y-1/2 rtl:right-3 ltr:left-3 text-stone-400"></i>
+                                <input type="text" placeholder="4000 1234 5678 9010" class="w-full bg-stone-50 dark:bg-zinc-800/50 border border-stone-200 dark:border-zinc-700 rounded-xl py-2.5 rtl:pr-10 rtl:pl-4 ltr:pl-10 ltr:pr-4 text-sm focus:ring-2 focus:ring-brand-light outline-none text-left" dir="ltr">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" placeholder="MM/YY" class="w-full bg-stone-50 dark:bg-zinc-800/50 border border-stone-200 dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none text-center" dir="ltr">
+                                <input type="text" placeholder="CVC" class="w-full bg-stone-50 dark:bg-zinc-800/50 border border-stone-200 dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none text-center" dir="ltr">
+                            </div>
+                        </div>
+                        <button onclick="processMockPayment()" class="w-full bg-brand-dark hover:bg-brand-focus text-white font-bold py-3 rounded-xl shadow-lg transition-colors mt-4 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> <span data-i18n="payBtn">إتمام الدفع الآمن</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-admin" class="page-transition page-hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 data-i18n="adminTitle" class="text-2xl font-black">لوحة التحكم التنفيذية</h2>
+                    <p data-i18n="adminDesc" class="text-stone-500 text-sm mt-1">إدارة المخزون والمنتجات المتوفرة</p>
+                </div>
+                <button onclick="openAddProductModal()" class="bg-brand-dark hover:bg-brand-focus text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> <span data-i18n="addBtn">إضافة منتج جديد</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white dark:bg-zinc-900 border border-stone-200/60 dark:border-zinc-800 p-5 rounded-2xl">
+                    <span data-i18n="sales" class="text-xs font-bold text-stone-400 block mb-1">المبيعات</span>
+                    <span class="text-2xl font-black text-brand-dark">$8,450.00</span>
+                </div>
+                <div class="bg-white dark:bg-zinc-900 border border-stone-200/60 dark:border-zinc-800 p-5 rounded-2xl">
+                    <span data-i18n="visitors" class="text-xs font-bold text-stone-400 block mb-1">الزيارات</span>
+                    <span class="text-2xl font-black text-amber-500">124</span>
+                </div>
+                <div class="bg-white dark:bg-zinc-900 border border-stone-200/60 dark:border-zinc-800 p-5 rounded-2xl">
+                    <span data-i18n="prodCount" class="text-xs font-bold text-stone-400 block mb-1">عدد المنتجات</span>
+                    <span id="adminTotalProducts" class="text-2xl font-black">0</span>
+                </div>
+                <div class="bg-white dark:bg-zinc-900 border border-stone-200/60 dark:border-zinc-800 p-5 rounded-2xl">
+                    <span data-i18n="convRate" class="text-xs font-bold text-stone-400 block mb-1">معدل التحويل</span>
+                    <span class="text-2xl font-black text-blue-500">3.2%</span>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 border border-stone-200/60 dark:border-zinc-800 rounded-2xl overflow-hidden">
+                <div data-i18n="inventory" class="p-5 border-b border-stone-100 dark:border-zinc-800 font-bold">إدارة المخزون</div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-stone-50 dark:bg-zinc-800/40 text-stone-500 font-semibold border-b dark:border-zinc-800 rtl:text-right ltr:text-left">
+                            <tr>
+                                <th data-i18n="colProd" class="p-4">المنتج</th>
+                                <th data-i18n="colCat" class="p-4">التصنيف</th>
+                                <th data-i18n="colPrice" class="p-4">السعر</th>
+                                <th data-i18n="colActions" class="p-4 text-center">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminProductsTable" class="divide-y divide-stone-100 dark:divide-zinc-800 rtl:text-right ltr:text-left"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-lg p-6 space-y-4 border dark:border-zinc-800 shadow-2xl transition-all scale-95 duration-300 transform" id="modalContainer">
+            <h3 id="modalTitle" class="text-xl font-black">إضافة منتج</h3>
+            <div class="space-y-3">
+                <input type="hidden" id="modalProductId">
+                <input type="text" id="modalProductName" data-i18n="nameInput" placeholder="اسم المنتج" class="w-full bg-stone-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none">
+                <select id="modalProductCategory" class="w-full bg-stone-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none">
+                    <option value="skin" data-i18n="catSkin">عناية بالبشرة</option>
+                    <option value="oils" data-i18n="catOils">زيوت طبيعية</option>
+                    <option value="makeup" data-i18n="catMakeup">مكياج طبيعي</option>
+                    <option value="drinks" data-i18n="catDrinks">أعشاب ونقوع</option>
+                </select>
+                <input type="number" id="modalProductPrice" data-i18n="priceInput" placeholder="السعر" class="w-full bg-stone-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none">
+                <input type="text" id="modalProductImg" data-i18n="imgInput" placeholder="رابط الصورة" class="w-full bg-stone-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none">
+                <textarea id="modalProductDesc" rows="3" data-i18n="descInput" placeholder="الوصف" class="w-full bg-stone-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-xl py-2.5 px-4 text-sm focus:ring-2 focus:ring-brand-light outline-none"></textarea>
+            </div>
+            <div class="flex items-center justify-end gap-3 pt-2">
+                <button onclick="closeProductModal()" data-i18n="cancel" class="text-stone-500 hover:text-stone-700 font-medium text-sm px-4 py-2">إلغاء</button>
+                <button onclick="saveProductFromModal()" data-i18n="save" class="bg-brand-dark hover:bg-brand-focus text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // نظام الترجمة والنصوص المزدوجة
+        const translations = {
+            ar: {
+                brand: "NatureAura", navHome: "الرئيسية", navBrowse: "تصفح المنتجات",
+                searchPlaceholder: "ابحث عن زيوت، ماسكات، أو مستحضرات...", cartItems: "منتجات", adminBtn: "الإدارة",
+                heroTag: "عناية طبيعية نقية", heroTitle: "جمالك من الطبيعة، نقي ومستدام",
+                heroDesc: "استكشفي تشكيلتنا الفاخرة من الزيوت الطبيعية، ماسكات بذور الكتان، ومستحضرات التجميل العضوية الخالية من المواد الكيميائية.",
+                heroBtn: "ابدئي الاستكشاف", catAll: "الكل", catSkin: "عناية بالبشرة", catOils: "زيوت طبيعية",
+                catMakeup: "مكياج طبيعي", catDrinks: "أعشاب ونقوع", backToStore: "العودة للمتجر",
+                addToCart: "إضافة للسلة", specs: "المميزات العضوية", spec1: "مكونات طبيعية 100%", spec2: "خالٍ من المواد الكيميائية",
+                spec3: "صديق للبيئة", checkoutTitle: "مراجعة طلبك وإتمام الدفع", selectedProducts: "المنتجات المختارة",
+                orderSummary: "ملخص الفاتورة", subtotal: "المجموع الفرعي", shipping: "تكاليف الشحن", free: "مجاني",
+                total: "الإجمالي", cardDetails: "تفاصيل البطاقة", payBtn: "إتمام الدفع الآمن",
+                adminTitle: "لوحة التحكم التنفيذية", adminDesc: "إدارة المخزون والمنتجات المتوفرة", addBtn: "إضافة منتج",
+                sales: "المبيعات", visitors: "الزيارات", prodCount: "عدد المنتجات", convRate: "معدل التحويل",
+                inventory: "إدارة المخزون", colProd: "المنتج", colCat: "التصنيف", colPrice: "السعر", colActions: "الإجراءات",
+                edit: "تعديل", delete: "حذف", emptyCart: "سلة المشتريات خالية حالياً.", alertEmpty: "السلة خالية تماماً.",
+                alertSuccess: "تمت عملية الدفع بنجاح!", modalTitleAdd: "إضافة منتج", modalTitleEdit: "تعديل منتج",
+                cancel: "إلغاء", save: "حفظ", priceInput: "السعر", imgInput: "رابط الصورة", nameInput: "اسم المنتج", descInput: "الوصف"
+            },
+            en: {
+                brand: "NatureAura", navHome: "Home", navBrowse: "Browse Products",
+                searchPlaceholder: "Search for oils, masks, or cosmetics...", cartItems: "Items", adminBtn: "Admin",
+                heroTag: "PURE NATURAL CARE", heroTitle: "Your Beauty from Nature, Pure & Sustainable",
+                heroDesc: "Explore our luxurious collection of natural oils, flaxseed masks, and organic chemical-free cosmetics.",
+                heroBtn: "Start Exploring", catAll: "All", catSkin: "Skincare", catOils: "Natural Oils",
+                catMakeup: "Natural Makeup", catDrinks: "Herbs & Infusions", backToStore: "Back to Store",
+                addToCart: "Add to Cart", specs: "Organic Features", spec1: "100% Natural Ingredients", spec2: "Chemical-Free",
+                spec3: "Eco-Friendly", checkoutTitle: "Review Order & Checkout", selectedProducts: "Selected Products",
+                orderSummary: "Order Summary", subtotal: "Subtotal", shipping: "Shipping", free: "Free",
+                total: "Total", cardDetails: "Card Details", payBtn: "Complete Secure Payment",
+                adminTitle: "Executive Dashboard", adminDesc: "Manage inventory and available products", addBtn: "Add Product",
+                sales: "Sales", visitors: "Visitors", prodCount: "Products Count", convRate: "Conversion Rate",
+                inventory: "Inventory Management", colProd: "Product", colCat: "Category", colPrice: "Price", colActions: "Actions",
+                edit: "Edit", delete: "Delete", emptyCart: "Your cart is currently empty.", alertEmpty: "Cart is completely empty.",
+                alertSuccess: "Payment completed successfully!", modalTitleAdd: "Add Product", modalTitleEdit: "Edit Product",
+                cancel: "Cancel", save: "Save", priceInput: "Price", imgInput: "Image URL", nameInput: "Product Name", descInput: "Description"
+            }
+        };
+
+        // مصفوفة المنتجات الطبيعية المتوافقة مع بنية اللغتين
+        let products = [
+            { id: 1, name: { ar: "سيروم الهيالورونيك وخلاصة الورد", en: "Rose Extract & Hyaluronic Serum" }, category: "skin", price: 45.00, desc: { ar: "تركيبة طبيعية مكثفة غنية بزيت الورد الدمشقي العضوي النقي وفيتامين E لترطيب عميق وتجديد فوري.", en: "Intensive natural formula rich in pure organic Damask rose oil and Vitamin E for deep hydration." }, img: "https://images.unsplash.com/photo-1608248597481-496100c80836?w=500" },
+            { id: 2, name: { ar: "زيت اللوز الحلو العضوي النقي", en: "Pure Organic Sweet Almond Oil" }, category: "oils", price: 28.00, desc: { ar: "زيت لوز حلو معصور على البارد، مثالي لترطيب البشرة والشعر بعمق وتغذيته بالفيتامينات الأساسية.", en: "Cold-pressed sweet almond oil, perfect for deep skin and hair hydration, rich in essential vitamins." }, img: "https://images.unsplash.com/photo-1626289832791-628d02e3b2e5?w=500" },
+            { id: 3, name: { ar: "ماسك جل بذور الكتان الطبيعي", en: "Natural Flaxseed Gel Mask" }, category: "skin", price: 32.00, desc: { ar: "علاج مخملي طبيعي لتغذية البشرة والترطيب الفائق، مصنع يدوياً بالكامل من بذور الكتان العضوية.", en: "Velvety natural treatment for skin nourishment and supreme hydration, entirely handmade from organic flaxseeds." }, img: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=500" },
+            { id: 4, name: { ar: "باليت مورد شفاه وخدود كريمي", en: "Cream Lip & Cheek Tint Palette" }, category: "makeup", price: 55.00, desc: { ar: "مجموعة ألوان كريمية طبيعية متعددة الاستخدامات، تندمج بنعومة لإطلالة مشرقة وحيوية بدون أضرار.", en: "Versatile natural cream colors that blend smoothly for a radiant and lively look without harm." }, img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500" },
+            { id: 5, name: { ar: "مشروب الكركديه وتوابل الشتاء", en: "Hibiscus & Winter Spices Infusion" }, category: "drinks", price: 18.00, desc: { ar: "مزيج دافئ ومريح من أزهار الكركديه العضوية المعزز بالقرفة والقرنفل واليانسون.", en: "Warm and comforting blend of organic hibiscus flowers enhanced with cinnamon, cloves, and anise." }, img: "https://images.unsplash.com/photo-1576092762791-dd9e2220abd4?w=500" },
+            { id: 6, name: { ar: "باليت بلاشر بودرة مخملي", en: "Velvet Powder Blush Palette" }, category: "makeup", price: 48.00, desc: { ar: "درجات زهرية وخوخية مصنعة من معادن طبيعية بحتة لتعزيز إشراقة وجهك بلمسة طبيعية.", en: "Pink and peach shades made entirely from natural minerals to enhance your facial glow naturally." }, img: "https://images.unsplash.com/photo-1512496015851-a1fb8fc1b97a?w=500" }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let currentLang = 'ar';
+        let currentFilter = 'all';
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[currentLang][key];
+                    } else if (el.tagName === 'OPTION') {
+                        el.textContent = translations[currentLang][key];
+                    } else {
+                        el.innerHTML = translations[currentLang][key];
+                    }
+                }
+            });
+
+            // تحديث اتجاه الأيقونات بناءً على اللغة
+            const backIcon = document.getElementById('backIcon');
+            if(backIcon) {
+                backIcon.className = currentLang === 'ar' ? 'fa-solid fa-arrow-right group-hover:-translate-x-1 transition-transform rtl:group-hover:translate-x-1' : 'fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform';
+            }
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.getElementById('langBtn').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
+            
+            applyTranslations();
+            renderCategories();
+            showCategory(currentFilter);
+            if(document.getElementById('view-checkout').classList.contains('page-visible')) localStorage.setItem('cart', JSON.stringify(cart)); renderCartItems();
+            if(document.getElementById('view-admin').classList.contains('page-visible')) updateAdminDashboard();
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoryFilter');
+            const cats = [
+                { id: 'all', key: 'catAll' },
+                { id: 'skin', key: 'catSkin' },
+                { id: 'oils', key: 'catOils' },
+                { id: 'makeup', key: 'catMakeup' },
+                { id: 'drinks', key: 'catDrinks' }
+            ];
+            
+            container.innerHTML = cats.map(c => `
+                <button onclick="showCategory('${c.id}')" class="cat-btn px-5 py-2.5 ${currentFilter === c.id ? 'bg-brand-dark text-white shadow-md' : 'bg-white dark:bg-zinc-900 text-stone-600 dark:text-zinc-400 border border-stone-200/60 dark:border-zinc-800'} text-sm font-medium rounded-xl transition-all whitespace-nowrap">
+                    ${translations[currentLang][c.key]}
+                </button>
+            `).join('');
+        }
+
+        function navigateTo(viewId) {
+            ['view-home', 'view-product-detail', 'view-checkout', 'view-admin'].forEach(id => {
+                const el = document.getElementById(id);
+                if (id === 'view-' + viewId) {
+                    el.classList.remove('page-hidden');
+                    el.classList.add('page-visible');
+                } else {
+                    el.classList.remove('page-visible');
+                    el.classList.add('page-hidden');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(viewId === 'admin') updateAdminDashboard();
+            if(viewId === 'checkout') localStorage.setItem('cart', JSON.stringify(cart)); renderCartItems();
+        }
+
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            
+            productsToRender.forEach((p, idx) => {
+                const catName = translations[currentLang][
+                    p.category === 'skin' ? 'catSkin' : 
+                    p.category === 'oils' ? 'catOils' : 
+                    p.category === 'makeup' ? 'catMakeup' : 'catDrinks'
+                ];
+
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200/60 dark:border-zinc-800/80 overflow-hidden hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer";
+                card.style.animation = `fadeIn 0.5s ease forwards ${idx * 0.05}s`;
+                card.style.opacity = '0';
+                
+                card.innerHTML = `
+                    <div class="h-44 md:h-52 bg-stone-50 dark:bg-zinc-800/30 overflow-hidden relative" onclick="openProductDetail(${p.id})">
+                        <img src="${p.img}" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <span class="text-[10px] uppercase font-bold text-brand-light tracking-wider mb-1">${catName}</span>
+                        <h3 onclick="openProductDetail(${p.id})" class="font-bold text-stone-800 dark:text-zinc-100 hover:text-brand-focus line-clamp-1 text-sm md:text-base transition-colors">${typeof p.name === 'object' ? p.name[currentLang] : p.name}</h3>
+                        <p class="text-xs text-stone-400 dark:text-zinc-500 mt-1 line-clamp-2 leading-relaxed flex-1">${typeof p.desc === 'object' ? p.desc[currentLang] : p.desc}</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-base font-black text-stone-900 dark:text-zinc-100">$${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id}, event)" class="bg-stone-100 hover:bg-brand-dark text-stone-700 hover:text-white dark:bg-zinc-800 dark:hover:bg-brand-dark dark:text-zinc-300 p-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">${translations[currentLang].addToCart}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            if(!document.getElementById('customAnimationStyles')) {
+                const style = document.createElement('style');
+                style.id = 'customAnimationStyles';
+                style.innerHTML = `@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }`;
+                document.head.appendChild(style);
+            }
+        }
+
+        function showCategory(cat) {
+            currentFilter = cat;
+            renderCategories();
+            if(cat === 'all') renderProducts(products);
+            else renderProducts(products.filter(p => p.category === cat));
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const filtered = products.filter(p => {
+                const nameStr = typeof p.name === 'object' ? p.name[currentLang].toLowerCase() : p.name.toLowerCase();
+                const descStr = typeof p.desc === 'object' ? p.desc[currentLang].toLowerCase() : p.desc.toLowerCase();
+                return nameStr.includes(query) || descStr.includes(query);
+            });
+            renderProducts(filtered);
+        }
+
+        function openProductDetail(id) {
+            const p = products.find(prod => prod.id === id);
+            if(!p) return;
+            
+            const catName = translations[currentLang][
+                p.category === 'skin' ? 'catSkin' : 
+                p.category === 'oils' ? 'catOils' : 
+                p.category === 'makeup' ? 'catMakeup' : 'catDrinks'
+            ];
+            const pName = typeof p.name === 'object' ? p.name[currentLang] : p.name;
+            const pDesc = typeof p.desc === 'object' ? p.desc[currentLang] : p.desc;
+
+            const detailContent = document.getElementById('productDetailContent');
+            detailContent.innerHTML = `
+                <div class="rounded-2xl overflow-hidden bg-stone-50 border dark:border-zinc-800 shadow-inner">
+                    <img src="${p.img}" alt="" class="w-full h-full object-cover">
+                </div>
+                <div class="flex flex-col justify-center space-y-4">
+                    <span class="bg-brand-light/10 text-brand-focus dark:text-brand-light text-xs font-bold px-3 py-1 rounded-full w-fit uppercase tracking-wider">${catName}</span>
+                    <h2 class="text-2xl md:text-3xl font-black">${pName}</h2>
+                    <div class="text-2xl font-black text-brand-dark">$${p.price.toFixed(2)}</div>
+                    <p class="text-stone-500 dark:text-zinc-400 text-sm md:text-base leading-relaxed">${pDesc}</p>
+                    <div class="border-t border-stone-100 dark:border-zinc-800 pt-4 mt-2">
+                        <h4 class="text-xs font-bold uppercase text-stone-400 mb-3">${translations[currentLang].specs}</h4>
+                        <ul class="text-xs space-y-2 text-stone-500 dark:text-zinc-400">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-light"></i> ${translations[currentLang].spec1}</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-light"></i> ${translations[currentLang].spec2}</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-light"></i> ${translations[currentLang].spec3}</li>
+                        </ul>
+                    </div>
+                    <button onclick="addToCart(${p.id}, event)" class="bg-brand-dark hover:bg-brand-focus text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-sm w-full md:w-fit flex items-center justify-center gap-2 mt-4">
+                        <i class="fa-solid fa-cart-plus"></i> ${translations[currentLang].addToCart}
+                    </button>
+                </div>
+            `;
+            navigateTo('product-detail');
+        }
+
+        function addToCart(id, ev) {
+            if(ev) ev.stopPropagation();
+            const product = products.find(p => p.id === id);
+            if(product) {
+                cart.push(product);
+                document.getElementById('cartCount').textContent = cart.length; localStorage.setItem('cart', JSON.stringify(cart));
+                const cartBtn = document.getElementById('cartCount').parentElement;
+                cartBtn.classList.add('scale-125', 'text-brand-dark');
+                setTimeout(() => cartBtn.classList.remove('scale-125', 'text-brand-dark'), 250); showToast(currentLang==='ar'?'تمت إضافة المنتج للسلة':'Product added to cart');
+            }
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsContainer');
+            document.getElementById('checkoutCartCount').textContent = `${cart.length} ${translations[currentLang].cartItems}`;
+            container.innerHTML = '';
+            
+            if(cart.length === 0) {
+                container.innerHTML = `<div class="py-8 text-center text-sm text-stone-400 font-medium"><i class="fa-solid fa-basket-shopping text-2xl mb-2 block"></i> ${translations[currentLang].emptyCart}</div>`;
+                document.getElementById('subtotalPrice').textContent = "$0.00";
+                document.getElementById('totalPrice').textContent = "$0.00";
+                return;
+            }
+            
+            let subtotal = 0;
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                const pName = typeof item.name === 'object' ? item.name[currentLang] : item.name;
+                const row = document.createElement('div');
+                row.className = "flex items-center gap-4 py-4";
+                row.innerHTML = `
+                    <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border dark:border-zinc-800 shadow-sm">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-sm truncate">${pName}</h4>
+                        <span class="text-xs text-brand-dark font-bold mt-1 block">$${item.price.toFixed(2)}</span>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-stone-400 hover:text-rose-500 w-8 h-8 rounded-full hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center justify-center">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+            
+            document.getElementById('subtotalPrice').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('totalPrice').textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            document.getElementById('cartCount').textContent = cart.length; localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(cart)); renderCartItems();
+        }
+
+        function processMockPayment() {
+            if(cart.length === 0) {
+                alert(translations[currentLang].alertEmpty);
+                return;
+            }
+            alert(translations[currentLang].alertSuccess);
+            cart = []; localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cartCount').textContent = '0';
+            navigateTo('home');
+        }
+
+        function updateAdminDashboard() {
+            document.getElementById('adminTotalProducts').textContent = products.length;
+            const tbody = document.getElementById('adminProductsTable');
+            tbody.innerHTML = '';
+            
+            products.forEach(p => {
+                const catName = translations[currentLang][
+                    p.category === 'skin' ? 'catSkin' : 
+                    p.category === 'oils' ? 'catOils' : 
+                    p.category === 'makeup' ? 'catMakeup' : 'catDrinks'
+                ];
+                const pName = typeof p.name === 'object' ? p.name[currentLang] : p.name;
+
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-stone-100 dark:border-zinc-800/60 hover:bg-stone-50/50 dark:hover:bg-zinc-800/30 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 flex items-center gap-3">
+                        <img src="${p.img}" class="w-10 h-10 object-cover rounded-lg shadow-sm border dark:border-zinc-700">
+                        <span class="font-bold text-stone-800 dark:text-zinc-200 truncate max-w-[180px]">${pName}</span>
+                    </td>
+                    <td class="p-4 text-xs font-semibold text-brand-dark uppercase tracking-wider">${catName}</td>
+                    <td class="p-4 font-bold text-stone-900 dark:text-zinc-100">$${p.price.toFixed(2)}</td>
+                    <td class="p-4 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <button onclick="openEditProductModal(${p.id})" class="text-stone-400 hover:text-brand-dark transition-colors p-2" title="${translations[currentLang].edit}"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="deleteProductFromAdmin(${p.id})" class="text-stone-400 hover:text-rose-500 transition-colors p-2" title="${translations[currentLang].delete}"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteProductFromAdmin(id) {
+            products = products.filter(p => p.id !== id);
+            updateAdminDashboard();
+            renderProducts(products);
+        }
+
+        function openAddProductModal() {
+            document.getElementById('modalTitle').textContent = translations[currentLang].modalTitleAdd;
+            document.getElementById('modalProductId').value = '';
+            document.getElementById('modalProductName').value = '';
+            document.getElementById('modalProductPrice').value = '';
+            document.getElementById('modalProductImg').value = '';
+            document.getElementById('modalProductDesc').value = '';
+            toggleModalDisplay(true);
+        }
+
+        function openEditProductModal(id) {
+            const p = products.find(prod => prod.id === id);
+            if(!p) return;
+            document.getElementById('modalTitle').textContent = translations[currentLang].modalTitleEdit;
+            document.getElementById('modalProductId').value = p.id;
+            document.getElementById('modalProductName').value = typeof p.name === 'object' ? p.name[currentLang] : p.name;
+            document.getElementById('modalProductCategory').value = p.category;
+            document.getElementById('modalProductPrice').value = p.price;
+            document.getElementById('modalProductImg').value = p.img;
+            document.getElementById('modalProductDesc').value = typeof p.desc === 'object' ? p.desc[currentLang] : p.desc;
+            toggleModalDisplay(true);
+        }
+
+        function toggleModalDisplay(show) {
+            const modal = document.getElementById('productModal');
+            const container = document.getElementById('modalContainer');
+            if(show) {
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+                setTimeout(() => container.classList.remove('scale-95', 'opacity-0'), 50);
+            } else {
+                container.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => { modal.classList.remove('flex'); modal.classList.add('hidden'); }, 200);
+            }
+        }
+
+        function closeProductModal() { toggleModalDisplay(false); }
+
+        function saveProductFromModal() {
+            const id = document.getElementById('modalProductId').value;
+            const nameVal = document.getElementById('modalProductName').value;
+            const category = document.getElementById('modalProductCategory').value;
+            const price = parseFloat(document.getElementById('modalProductPrice').value);
+            const img = document.getElementById('modalProductImg').value || 'https://images.unsplash.com/photo-1608248597481-496100c80836?w=500';
+            const descVal = document.getElementById('modalProductDesc').value;
+
+            if(!nameVal || !price) return;
+
+            const nameObj = currentLang === 'ar' ? { ar: nameVal, en: nameVal } : { ar: nameVal, en: nameVal };
+            const descObj = currentLang === 'ar' ? { ar: descVal, en: descVal } : { ar: descVal, en: descVal };
+
+            if(id) {
+                const pIndex = products.findIndex(p => p.id == id);
+                if(pIndex !== -1) {
+                    const existingP = products[pIndex];
+                    if(typeof existingP.name === 'object') existingP.name[currentLang] = nameVal; else existingP.name = nameObj;
+                    if(typeof existingP.desc === 'object') existingP.desc[currentLang] = descVal; else existingP.desc = descObj;
+                    existingP.category = category; existingP.price = price; existingP.img = img;
+                }
+            } else {
+                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+                products.push({ id: newId, name: nameObj, category, price, img, desc: descObj });
+            }
+
+            closeProductModal();
+            updateAdminDashboard();
+            showCategory(currentFilter);
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        
+function showToast(message){
+    const toast=document.getElementById('toast');
+    if(!toast) return;
+    toast.textContent=message;
+    toast.classList.remove('hidden');
+    setTimeout(()=>toast.classList.add('hidden'),2000);
+}
+
+let searchTimeout;
+function debounceSearch(){
+    clearTimeout(searchTimeout);
+    searchTimeout=setTimeout(searchProducts,300);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+            renderCategories();
+            applyTranslations();
+            renderProducts(products);
+        });
+    </script>
+
+<div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-xl hidden z-[9999]"></div>
+
+</body>
+</html>
